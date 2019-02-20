@@ -7,6 +7,8 @@
 * Spring boot 
 * Gradle 
 * DB : ???
+* eclipse encoding : utf-8 
+  * project right click -> Properties -> Resource -> Text file encoding -> Other -> Select UTF-8
 
 ### 3. 프로젝트 세팅
 * lombok plugin 세팅 필요 
