@@ -65,7 +65,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.failureUrl("/")
 				.and()
 				// 로그아웃관련 설정
-				.logout().permitAll();
+				.logout()
+				.logoutSuccessUrl("/");
+		
 		http.headers().frameOptions().disable();
 		
 	}

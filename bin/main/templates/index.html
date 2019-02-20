@@ -14,7 +14,7 @@
 <body>
 	<h1>카테고리선택</h1>
 	<th:block th:each="posts : ${postslist}">
-		<div class="col-md-4">
+		<div class="col-md-4" style="border: solid 1px">
 			<span id="category" th:attr="data-gtype=${posts.category}"></span> <span
 				id="fileName" th:attr="data-gtype=${posts.fileName}"></span>
 			<h3 th:text="${posts.category}" th:id="${posts.category}"></h3>

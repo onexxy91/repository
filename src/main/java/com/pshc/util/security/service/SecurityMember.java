@@ -24,7 +24,7 @@ public class SecurityMember extends User{
 	
 	public SecurityMember(Member member) {
 		super(member.getUid(), member.getPassword(), makeGrantedAuthority(member.getRoles()));
-		log.info("SecurityMember initial! " + makeGrantedAuthority(member.getRoles()));
+		log.info("SecurityMember initial! " + makeGrantedAuthority(member.getRoles()) + member.getPassword());
 		// TODO Auto-generated constructor stub
 	}
 

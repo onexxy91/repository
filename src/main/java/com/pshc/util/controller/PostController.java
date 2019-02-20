@@ -1,5 +1,7 @@
 package com.pshc.util.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.data.domain.Page;
@@ -10,16 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pshc.util.dto.CategoryRepository;
 import com.pshc.util.dto.PostsDto;
 import com.pshc.util.dto.PostsRepository;
+import com.pshc.util.model.Category;
 import com.pshc.util.model.Posts;
 import com.pshc.util.service.FileUploadService;
 
@@ -32,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 public class PostController {
 
 	private PostsRepository postsRepository;
+	private CategoryRepository categoryRepository;
 	private PostsDto postsDto;
 	private FileUploadService fileUpload;
 
@@ -55,7 +58,9 @@ public class PostController {
 	public String postsView(Model model,
 			@PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 10) Pageable pageable) {
 		Page<Posts> postsList = postsRepository.findAll(pageable);
+		List<Category> categoryList = categoryRepository.findAll();
 		model.addAttribute("postslist", postsList);
+		model.addAttribute("categorys", categoryList);
 		return "heag";
 	}
 
