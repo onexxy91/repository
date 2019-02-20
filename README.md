@@ -9,4 +9,6 @@
 * DB : ???
 
 ### 3. 프로젝트 세팅
-* lombok plugin 세팅 필요
+* lombok plugin 세팅 필요 
+* 파일 다운로드 경로 : [https://projectlombok.org/download](https://projectlombok.org/download)
+* Download 후 해당 경로에서 java -jar lombok.jar
