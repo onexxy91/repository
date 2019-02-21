@@ -7,23 +7,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.pshc.util.config.RestURIConstants;
 import com.pshc.util.dto.PostsRepository;
@@ -33,7 +24,6 @@ import com.pshc.util.model.Member;
 import com.pshc.util.model.MemberRole;
 import com.pshc.util.model.Posts;
 import com.pshc.util.service.AwsService;
-import com.pshc.util.service.FileUploadService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -66,13 +56,9 @@ public class MainController {
 	// 로그인 view
 	@RequestMapping("/")
 	public String loginView() {
-		return "login/login";
+		return "auth/login";
 	}
 	
-	@RequestMapping("/test1")
-	public String testView() {
-		return "test1";
-	}
 	@GetMapping("/main")
 	public String mainView(Model model) {
 		log.info(getClientInfo() + "/main");
@@ -97,7 +83,7 @@ public class MainController {
 	@RequestMapping("/sign")
 	public String signUp() {
 
-		return "sign";
+		return "auth/sign";
 	}
 
 	// 회원가입 Proc
