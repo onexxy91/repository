@@ -66,9 +66,13 @@ public class MainController {
 	// 로그인 view
 	@RequestMapping("/")
 	public String loginView() {
-		return "login";
+		return "login/login";
 	}
-
+	
+	@RequestMapping("/test1")
+	public String testView() {
+		return "test1";
+	}
 	@GetMapping("/main")
 	public String mainView(Model model) {
 		log.info(getClientInfo() + "/main");
