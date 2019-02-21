@@ -42,7 +42,7 @@ public class AWSConfig {
 				.build();
 
 		log.info("amazonS3ClientBuilder Initializable");
-
+		
 		return amazonS3;
 
 	}

@@ -82,4 +82,12 @@ public class PostController {
 		return "redirect:/posts";
 
 	}
+//	@PostMapping("/category")
+//	public String categoryUp(Category category, HttpServletRequest request) {
+//		long id = categoryRepository.count()+1;
+//		category.setId(id);
+//		log.info(category.getId()+" "+category.getName());
+//		categoryRepository.save(category);
+//		return "redirect:/posts";
+//	}
 }

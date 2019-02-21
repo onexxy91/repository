@@ -27,8 +27,8 @@
 									<div class="col-md-10">
 										<select name="category">
 											<th:block th:each="category : ${categorys}">
-												<option th:value="${category.categoryName}"
-													th:text="${category.categoryName}"></option>
+												<option th:value="${category.name}"
+													th:text="${category.name}"></option>
 											</th:block>
 										</select>
 									</div>
@@ -124,12 +124,12 @@
 		<p>
 			홈으로 이동-><a href="/main">link</a>
 		</p>
-		<button type="button" class="btn btn-warning"
-			data-toggle="modal" data-target="#categoryModal">카테고리추가</button>
+		<button type="button" class="btn btn-warning" data-toggle="modal"
+			data-target="#categoryModal">카테고리추가</button>
 	</div>
 	<!-- categoryModal -->
-	<div class="modal fade" id="categoryModal" tabindex="-1"
-		role="modal" aria-labelledby="Modal-label-1">
+	<div class="modal fade" id="categoryModal" tabindex="-1" role="modal"
+		aria-labelledby="Modal-label-1">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -140,7 +140,10 @@
 					<h3>카테고리 추가</h3>
 				</div>
 				<div class="modal-body">
-					<label>추가명</label> <input class="text">
+					<form th:action="@{/category}" method="POST">
+						<label>추가명</label> <input type="text" name="name">
+						<button class="btn btn-lg btn-primary btn-block">저장</button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -197,7 +200,7 @@
 							</table>
 						</div>
 						<div class="modal-footer">
-							<button type="submit">수정</button>
+							<button class="btn btn-lg btn-primary btn-block" type="submit">수정</button>
 						</div>
 					</div>
 				</div>

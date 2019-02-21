@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.AmazonServiceException;
@@ -23,7 +24,10 @@ import lombok.extern.slf4j.Slf4j;
 public class AwsService {
 	@Autowired
 	private AmazonS3 amazonS3;
-
+	
+	@Value("${cloud.aws.s3.bucket}")
+	private String bucketName;
+	
 	public void fileUpload(String bucketName, File file, String fileName) {
 		if (amazonS3 != null) {
 			try {
