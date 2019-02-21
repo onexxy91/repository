@@ -38,6 +38,7 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws'
 	runtimeOnly 'com.h2database:h2'
 	compileOnly 'org.projectlombok:lombok'
+	compile("org.springframework.boot:spring-boot-starter-security")
 	compile('org.springframework.boot:spring-boot-autoconfigure')
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
