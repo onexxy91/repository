@@ -66,7 +66,7 @@ public class MainController {
 	// 로그인 view
 	@RequestMapping("/")
 	public String loginView() {
-		return "login";
+		return "login/login";
 	}
 	
 	@RequestMapping("/test1")
