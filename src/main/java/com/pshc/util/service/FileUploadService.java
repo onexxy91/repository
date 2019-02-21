@@ -23,26 +23,26 @@ public class FileUploadService {
 	private PostsDto postsDto;
 	@Autowired
 	private PostsRepository postsRepasitory;
-	
+
 	public void doWork(HttpServletRequest request, MultipartFile multiFile) {
 		try {
 			File convFile = new File(multiFile.getOriginalFilename());
 			FileOutputStream fos = new FileOutputStream(convFile);
 			fos.write(multiFile.getBytes());
-			
+
 			fos.close();
-			
+
 			postsDto.setCategory(request.getParameter("category"));
 			postsDto.setVersion(request.getParameter("version"));
 			postsDto.setDistinction(request.getParameter("distinction"));
 			postsDto.setFileName(convFile.getName());
 			log.info(postsDto.toString());
-			awsService.fileUpload(postsDto.getCategory().toLowerCase(), convFile, convFile.getName());
-			
+			awsService.fileUpload(convFile, postsDto.getCategory(), convFile.getName());
+
 			postsRepasitory.save(postsDto.toEntity());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }

@@ -121,13 +121,13 @@ public class MainController {
 		log.info(getClientInfo() + "/filedown?" + fileCommand.getCategory() + " " + fileCommand.getFileName());
 
 		OutputStream responseOut = null;
-		String bucketName = fileCommand.getCategory();
+		String category = fileCommand.getCategory();
 		String fileName = fileCommand.getFileName();
 
 		try {
 			response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
 			responseOut = response.getOutputStream();
-			awsService.downloadFile(bucketName.toLowerCase(), fileName, responseOut);
+			awsService.downloadFile(category, fileName, responseOut);
 		} catch (Exception e) {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			e.printStackTrace();

@@ -24,14 +24,16 @@ import lombok.extern.slf4j.Slf4j;
 public class AwsService {
 	@Autowired
 	private AmazonS3 amazonS3;
-	
+
 	@Value("${cloud.aws.s3.bucket}")
 	private String bucketName;
-	
-	public void fileUpload(String bucketName, File file, String fileName) {
+
+	public void fileUpload(File file, String category, String fileName) {
 		if (amazonS3 != null) {
+			String setFile = category + "/"+ fileName;
+			log.info("upload test " + setFile);
 			try {
-				PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, fileName, file);
+				PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, setFile, file);
 
 				// file permission
 				putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
@@ -48,15 +50,16 @@ public class AwsService {
 	}
 
 	// download object
-	public void downloadFile(String bucketName, String fileName, OutputStream outputStream) throws IOException {
+	public void downloadFile(String category, String fileName, OutputStream outputStream) throws IOException {
 		if (amazonS3 == null) {
 			throw new NullPointerException();
 		}
-		log.info("download File Start " + fileName);
 		S3ObjectInputStream s3objectInputStream = null;
+		String getFile = category + "/" + fileName;
+		log.info("download File Start " + getFile);
 
 		try {
-			S3Object s3Object = amazonS3.getObject(bucketName, fileName);
+			S3Object s3Object = amazonS3.getObject(bucketName, getFile);
 			s3objectInputStream = s3Object.getObjectContent();
 
 			byte[] bytesArray = new byte[4096];
