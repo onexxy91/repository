@@ -18,8 +18,9 @@ import com.pshc.util.dto.CategoryDto;
 import com.pshc.util.model.Category;
 import com.pshc.util.service.CategoryService;
 
-import groovy.util.logging.Slf4j;
+
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @AllArgsConstructor
 @Controller
@@ -46,6 +47,7 @@ public class CategoryController {
 	
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable int id) {
+		log.info(Integer.toString(id));
 		return PREFIX + "edit";
 	}
 	

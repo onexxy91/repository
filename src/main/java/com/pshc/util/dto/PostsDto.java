@@ -26,6 +26,6 @@ public class PostsDto {
 		return category.toLowerCase()+"          "+
 				version+"          "+
 				distinction+"          "+
-				fileName;
+				fileName+"        "+id;
 	}
 }
