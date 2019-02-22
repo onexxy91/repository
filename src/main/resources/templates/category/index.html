@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base}">
+<head>
+<title>카테고리</title>
+</head>
+<div layout:fragment="page_content" id="page_content">
+	<div class="container">
+		<div class="row my-4">
+			<div class="col-md-10">
+				<h3>카테고리 리스트</h3>
+			</div>
+			<div class="col-md-2">
+				<button type="button" class="btn btn-primary">추가하기</button>
+			</div>
+		</div>
+		<div class="row">
+			<th:block th:each="category : ${categories}">
+				<div class="col-md-4">
+					<div class="card mb-3">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${category.name}"></h5>
+							<h6 class="card-subtitle mb-2 text-muted" th:text="${category.version}"></h6>
+							<p class="card-text">Some quick example text to build on the
+								card title and make up the bulk of the card's content.</p>
+							<a href="#" class="btn btn-primary">관리</a> 
+							<a href="#" class="btn btn-danger">삭제</a>
+						</div>
+					</div>
+				</div>
+			</th:block>
+		</div>
+	</div>
+</div>
+</html>
