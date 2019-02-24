@@ -10,7 +10,7 @@ import lombok.Data;
 public class CategoryDto {
 	private String id;
 	private String name;
-	private String autoUpdate;
+	private String autoupdate;
 	private String enable;
 	private String visible;
 	private String content;
@@ -18,7 +18,7 @@ public class CategoryDto {
 	public Category toEntity() {
 		return Category.builder()
 				.name(name)
-				.autoUpdate(autoUpdate)
+				.autoUpdate(autoupdate)
 				.enable(enable)
 				.visible(visible)
 				.content(content)

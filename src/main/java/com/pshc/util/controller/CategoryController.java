@@ -18,8 +18,8 @@ import com.pshc.util.dto.CategoryDto;
 import com.pshc.util.model.Category;
 import com.pshc.util.service.CategoryService;
 
-import groovy.util.logging.Slf4j;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @AllArgsConstructor
 @Controller
@@ -40,7 +40,8 @@ public class CategoryController {
 	}
 
 	@GetMapping("/new")
-	public String newCategory() {
+	public String newCategory(Model model) {
+		model.addAttribute("category", new CategoryDto());
 		return PREFIX + "new";
 	}
 	
@@ -55,9 +56,9 @@ public class CategoryController {
 	}
 	
 	@PostMapping
-	public String create(CategoryDto categoryDto, HttpServletRequest request) {
-		categoryService.categoryCreate(categoryDto);
-
+	public String create(CategoryDto category, HttpServletRequest request) {
+		
+		categoryService.categoryCreate(category);
 		return PREFIX + "index";
 	}
 

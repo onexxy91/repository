@@ -3,6 +3,7 @@ package com.pshc.util.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.AccessLevel;
@@ -17,8 +18,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category {
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
-	@GeneratedValue
 	private Long id;
 	@Column
 	private String name;
