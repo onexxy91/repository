@@ -47,6 +47,7 @@ public class CategoryController {
 	
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable int id) {
+		log.info(Integer.toString(id));
 		return PREFIX + "edit";
 	}
 	
