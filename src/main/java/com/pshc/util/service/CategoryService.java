@@ -1,6 +1,7 @@
 package com.pshc.util.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,10 @@ public class CategoryService {
 
 	public List<Category> categoryRead() {
 		return categoryRepository.findAll();
+	}
+	
+	public Category findCategory(int id) {
+		return categoryRepository.findById((long)id).get();
 	}
 
 	public void categoryUpdate(CategoryDto categoryDto) {

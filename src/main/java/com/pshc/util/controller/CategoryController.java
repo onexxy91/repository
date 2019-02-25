@@ -52,7 +52,8 @@ public class CategoryController {
 	}
 	
 	@GetMapping("/{id}")
-	public String getCategory(@PathVariable int id) {
+	public String getCategory(@PathVariable int id, Model model) {
+		model.addAttribute("category", categoryService.findCategory(id));
 		return PREFIX + "show";
 	}
 	
@@ -60,14 +61,14 @@ public class CategoryController {
 	public String create(CategoryDto category, HttpServletRequest request) {
 		
 		categoryService.categoryCreate(category);
-		return PREFIX + "index";
+		return "redirect:" + PREFIX;
 	}
 
 	@PutMapping
 	public String update(CategoryDto categoryDto) {
 		categoryService.categoryUpdate(categoryDto);
 
-		return PREFIX + "index";
+		return PREFIX;
 	}
 
 	@DeleteMapping
