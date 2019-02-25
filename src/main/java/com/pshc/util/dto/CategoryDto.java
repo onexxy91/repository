@@ -17,11 +17,20 @@ public class CategoryDto {
 	
 	public Category toEntity() {
 		return Category.builder()
+				.id(Long.parseLong(id))
 				.name(name)
 				.autoUpdate(autoupdate)
 				.enable(enable)
 				.visible(visible)
 				.content(content)
 				.build();
+	}
+	public String toString(CategoryDto categoryDto) {
+		return categoryDto.id+"      "+
+	            categoryDto.autoupdate+"       "+
+	            categoryDto.enable+"          "+
+	            categoryDto.visible+"          "+
+	            categoryDto.content;
+				
 	}
 }

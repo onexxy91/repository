@@ -70,12 +70,13 @@ public class CategoryController {
 		log.info("category/update");
 		categoryService.categoryUpdate(categoryDto);
 
-		return PREFIX;
+		return "redirect:" + PREFIX;
 	}
 
 	@DeleteMapping
 	@ResponseBody
 	public String delete(CategoryDto categoryDto) {
+		log.info("category/delete"+ categoryDto.toString());
 		categoryService.categoryDelete(categoryDto);
 		return "succes";
 	}

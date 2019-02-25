@@ -33,8 +33,9 @@ public class Category {
 	private String content; 
 	
 	@Builder
-	public Category(String name , String autoUpdate, String enable
+	public Category(Long id, String name , String autoUpdate, String enable
 			, String visible, String content) {
+		this.id = id;
 		this.name = name; 
 		this.autoupdate = autoUpdate;
 		this.enable = enable;
