@@ -44,28 +44,30 @@ public class CategoryController {
 		model.addAttribute("category", new CategoryDto());
 		return PREFIX + "new";
 	}
-	
+
 	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable int id) {
+	public String edit(@PathVariable int id, Model model) {
 		log.info(Integer.toString(id));
+		model.addAttribute("category", categoryService.findCategory(id));
 		return PREFIX + "edit";
 	}
-	
+
 	@GetMapping("/{id}")
 	public String getCategory(@PathVariable int id, Model model) {
 		model.addAttribute("category", categoryService.findCategory(id));
 		return PREFIX + "show";
 	}
-	
+
 	@PostMapping
 	public String create(CategoryDto category, HttpServletRequest request) {
-		
+
 		categoryService.categoryCreate(category);
 		return "redirect:" + PREFIX;
 	}
 
 	@PutMapping
 	public String update(CategoryDto categoryDto) {
+		log.info("category/update");
 		categoryService.categoryUpdate(categoryDto);
 
 		return PREFIX;
