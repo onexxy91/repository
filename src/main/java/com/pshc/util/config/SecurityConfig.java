@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/main", "/posts", "/getfiledown", "/updatepost").hasRole("USER")
 				// .anyRequest().authenticated()
 				.and()
-				.csrf().ignoringAntMatchers("/h2-console/**", "/filedown", "/updatepost") // 여기!
+				.csrf().ignoringAntMatchers("/h2-console/**", "/filedown", "/updatepost", "/category") // 여기!
 				.and()
 				// 로그인 페이지 및 성공 URL, handler, 로그인시 사용되는 id, pass
 				.formLogin()

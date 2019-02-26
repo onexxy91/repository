@@ -55,7 +55,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-						<button type="submit" class="btn btn-primary" id="deleteBtn">삭제</button>
+						<button id="delete-modal-btn" type="button" class="btn btn-primary">삭제</button>
 					</div>
 				</div>
 			</div>
@@ -68,12 +68,29 @@
 		$('.deleteModal').on('click', function() {
 			var id = $(this).data('id');
 			var name = $(this).data('name');
-			console.log(id, name);
 			$(".modal-title").text(name);
 			$(".modal-body #categoryName").val(name);
 			$(".modal-body #categoryid").val(id);
 			$("#modal1").modal('show');
-		})
+		});
+		
+		$("#delete-modal-btn").on('click', function(){
+			var data = {
+				id : $("#categoryid").val()
+			};
+			$.ajax({
+				url : '/category', 
+				type : 'DELETE',
+				datatype : 'json',
+				contentType : 'application/json; charset=utf-8',
+				data : JSON.stringify(data)
+			}).done(function() {
+				alert('삭제되었습니다!');
+				location.reload(true);
+			}).fail(function(error) {
+				alert(error);
+			});
+		});
 	});
 </script>
 </html>

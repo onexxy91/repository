@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -74,9 +75,11 @@ public class CategoryController {
 	}
 
 	@DeleteMapping
-	public String delete(CategoryDto categoryDto) {
+	@ResponseBody
+	public String delete(@RequestBody CategoryDto categoryDto) {
 		log.info("category/delete"+ categoryDto.toString());
 		categoryService.categoryDelete(categoryDto);
-		return "redirect:" + PREFIX;
+		return "success";
 	}
+	
 }

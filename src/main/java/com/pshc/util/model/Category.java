@@ -30,7 +30,7 @@ public class Category {
 	@Column
 	private String visible;
 	@Column
-	private String content; 
+	private String content;
 	
 	@Builder
 	public Category(Long id, String name , String autoUpdate, String enable
