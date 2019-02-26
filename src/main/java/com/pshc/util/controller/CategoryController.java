@@ -74,10 +74,9 @@ public class CategoryController {
 	}
 
 	@DeleteMapping
-	@ResponseBody
 	public String delete(CategoryDto categoryDto) {
 		log.info("category/delete"+ categoryDto.toString());
 		categoryService.categoryDelete(categoryDto);
-		return "succes";
+		return "redirect:" + PREFIX;
 	}
 }

@@ -24,19 +24,56 @@
 							<h5 class="card-title" th:text="${category.name}"></h5>
 							<h6 class="card-subtitle mb-2 text-muted">v1.0.0</h6>
 							<p class="card-text" th:text="${category.content}"></p>
-							<div class="row">
-								<a th:href="|/category/${category.id}" class="btn btn-primary">관리</a>
-								<form th:method="delete" action="/category">
-									<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> 
-									<input type="hidden" name="id" th:value="${category.id}" />
-									<button type="submit" class="btn btn-danger">삭제</button>
-								</form>
-							</div>
+							<a th:href="|/category/${category.id}" class="btn btn-primary">관리</a>
+							<a href="#" class="btn btn-danger deleteModal"
+								th:data-id="${category.id}" th:data-name="${category.name}">삭제</a>
 						</div>
 					</div>
 				</div>
 			</th:block>
 		</div>
 	</div>
+	<!-- Delete modal -->
+	<div class="modal fade" id="modal1" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<form action="/category" th:method="delete">
+			<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title"></h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<h2>삭제하시겠습니까?</h2>
+						<input type="hidden" name="id" id="categoryid" value="" />
+						<input type="hidden" name="name" id="categoryName" value=""/>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+						<button type="submit" class="btn btn-primary" id="deleteBtn">삭제</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 </div>
+<script th:inline="javascript" layout:fragment="script_area">
+	$(document).ready(function(e) {
+		console.log("aaa");
+		$('.deleteModal').on('click', function() {
+			var id = $(this).data('id');
+			var name = $(this).data('name');
+			console.log(id, name);
+			$(".modal-title").text(name);
+			$(".modal-body #categoryName").val(name);
+			$(".modal-body #categoryid").val(id);
+			$("#modal1").modal('show');
+		})
+	});
+</script>
 </html>
