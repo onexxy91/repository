@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base}">
+<head>
+<title>파일 신규 등록</title>
+</head>
+<div layout:fragment="page_content" id="page_content">
+	<div class="container">
+		<div class="row mt-4">
+			<div class="col-md-10">
+				<h3>
+					신규 파일 등록<br /> <small>API URL : </small>
+				</h3>
+
+			</div>
+			<div class="col-md-2 text-right">
+				<a th:href="|/category/${post.id}" class="btn btn-primary">목록으로</a>
+			</div>
+		</div>
+		<div class="row mt-4">
+			<div class="col ">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroupFileAddon01">파일업로드</span>
+					</div>
+					<div class="custom-file">
+						<input type="file" class="custom-file-input" id="file"> 
+						<label class="custom-file-label">파일선택</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<form>
+					<div class="form-group row">
+						<label for="ver" class="col-sm-2 col-form-label">버전</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="ver" readonly>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="fileSize" class="col-sm-2 col-form-label">파일
+							사이즈</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="fileSize" value="MB"
+								readonly>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="description" class="col-sm-2 col-form-label">설명</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" id="description" rows="3">
+							</textarea>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="used" class="col-sm-2 col-form-label">사용 여부</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="used" readonly>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="beta" class="col-sm-2 col-form-label">베타 여부</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="beta" value="Y" readonly>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="name" class="col-sm-2 col-form-label">파일 명</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="name" value="Y" readonly>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="filePath" class="col-sm-2 col-form-label">파일
+							경로</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="filePath" readonly>
+						</div>
+					</div>
+				</form>
+				<div class="row">
+					<div class="col">
+						<button type="button" class="btn btn-primary">등록하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</html>
