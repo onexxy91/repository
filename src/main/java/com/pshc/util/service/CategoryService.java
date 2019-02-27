@@ -29,15 +29,7 @@ public class CategoryService {
 	}
 
 	public void categoryUpdate(CategoryDto categoryDto) {
-		
-		Long id = Long.parseLong(categoryDto.getId());
-		String name = categoryDto.getName();
-		String autoUpdate = categoryDto.getAutoupdate();
-		String enable = categoryDto.getEnable();
-		String visible = categoryDto.getVisible();
-		String content = categoryDto.getContent();
-
-		categoryRepository.setCategoryFor(name, autoUpdate, enable, visible, content, id);
+		categoryRepository.save(categoryDto.toEntity());
 	}
 
 	public void categoryDelete(CategoryDto categoryDto) {

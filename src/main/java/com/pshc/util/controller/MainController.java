@@ -105,7 +105,7 @@ public class MainController {
 	@GetMapping(RestURIConstants.GET_FILE_DOWN)
 	public void getFileDown(FileCommand fileCommand, HttpServletResponse response) {
 		log.info(getClientInfo() + "/filedown?" + fileCommand.getCategory() + " " + fileCommand.getFileName());
-
+		// token 
 		OutputStream responseOut = null;
 		String category = fileCommand.getCategory();
 		String fileName = fileCommand.getFileName();
