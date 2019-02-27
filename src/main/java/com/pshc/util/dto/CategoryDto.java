@@ -10,25 +10,22 @@ import lombok.Data;
 public class CategoryDto {
 	private String id;
 	private String name;
-	private String autoupdate;
-	private String enable;
+	private String used;
 	private String visible;
 	private String content;
 	
 	public Category toEntity() {
 		return Category.builder()
-				.id(Long.parseLong(id))
+				.id(Integer.parseInt(id))
 				.name(name)
-				.autoUpdate(autoupdate)
-				.enable(enable)
+				.used(used)
 				.visible(visible)
 				.content(content)
 				.build();
 	}
 	public String toString(CategoryDto categoryDto) {
 		return categoryDto.id+"      "+
-	            categoryDto.autoupdate+"       "+
-	            categoryDto.enable+"          "+
+	            categoryDto.used+"       "+
 	            categoryDto.visible+"          "+
 	            categoryDto.content;
 				

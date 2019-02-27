@@ -18,19 +18,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name ="user")
+@Table(name ="users")
 public class Member {
+	
 	@Id
-	@GeneratedValue
-	private Long id;
-	@Column
-	private String uid;
+	private String username;
 	@Column
 	private String password;
-	
+	@Column
+	private int enable;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="uid")
+	@JoinColumn(name="username")
 	private List<MemberRole> roles;
+	
 }
 

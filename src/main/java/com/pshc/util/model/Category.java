@@ -20,25 +20,21 @@ import lombok.NoArgsConstructor;
 public class Category {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
-	private Long id;
+	private int id;
 	@Column
 	private String name;
 	@Column
-	private String autoupdate;
-	@Column 
-	private String enable; 
+	private String used; 
 	@Column
 	private String visible;
 	@Column
 	private String content;
 	
 	@Builder
-	public Category(Long id, String name , String autoUpdate, String enable
-			, String visible, String content) {
+	public Category(int id, String name , String used, String visible, String content) {
 		this.id = id;
 		this.name = name; 
-		this.autoupdate = autoUpdate;
-		this.enable = enable;
+		this.used = used;
 		this.visible = visible;
 		this.content = content;
 	}

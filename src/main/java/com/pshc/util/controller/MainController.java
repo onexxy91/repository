@@ -22,7 +22,7 @@ import com.pshc.util.dto.UserRepository;
 import com.pshc.util.model.FileCommand;
 import com.pshc.util.model.Member;
 import com.pshc.util.model.MemberRole;
-import com.pshc.util.model.Posts;
+import com.pshc.util.model.Post;
 import com.pshc.util.service.AwsService;
 
 import lombok.AllArgsConstructor;
@@ -64,7 +64,7 @@ public class MainController {
 		log.info(getClientInfo() + "/main");
 
 		// List<Posts> postList = postsRepasitory.findAll();
-		List<Posts> postList = postsRepository.findByDistinction("정식");
+		List<Post> postList = postsRepository.findByDistinction("정식");
 		String fileDownURI = RestURIConstants.GET_FILE_DOWN;
 		model.addAttribute("postslist", postList);
 		model.addAttribute("fileDownURI", fileDownURI);
@@ -92,8 +92,14 @@ public class MainController {
 		MemberRole role = new MemberRole();
 		BCryptPasswordEncoder pEncoder = new BCryptPasswordEncoder();
 		member.setPassword(pEncoder.encode(member.getPassword()));
-		role.setRoleName("USER");
+		role.setUsername(member.getUsername());
+		role.setAuthority("USER");
 		member.setRoles(Arrays.asList(role));
+		for(MemberRole r : member.getRoles()) {
+			log.info("auth test");
+			log.info(r.getAuthority());
+		}
+		
 		userRepository.save(member);
 		return "redirect:/";
 

@@ -18,12 +18,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.pshc.util.dto.CategoryRepository;
-import com.pshc.util.dto.PostsDto;
-import com.pshc.util.dto.PostsRepository;
+import com.pshc.util.dto.PostDto;
 import com.pshc.util.model.Category;
-import com.pshc.util.model.Posts;
+import com.pshc.util.model.Post;
+import com.pshc.util.service.CategoryService;
 import com.pshc.util.service.FileUploadService;
+import com.pshc.util.service.PostService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,9 +33,11 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class PostController {
 
-	private PostsRepository postsRepository;
-	private CategoryRepository categoryRepository;
-	private PostsDto postsDto;
+	//private PostsRepository postsRepository;
+	//private CategoryRepository categoryRepository;
+	//private PostDto postsDto;
+	private PostService postService;
+	private CategoryService categoryService;
 	private FileUploadService fileUpload;
 
 	protected String getRemoteIp() {
@@ -57,9 +59,13 @@ public class PostController {
 	@GetMapping("/posts")
 	public String postsView(Model model,
 			@PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 10) Pageable pageable) {
-		Page<Posts> postsList = postsRepository.findAll(pageable);
-		List<Category> categoryList = categoryRepository.findAll();
-		model.addAttribute("postslist", postsList);
+		//Page<Post> postsList = postsRepository.findAll(pageable);
+		Page<Post> postList = postService.PagePostRead(pageable);
+		//List<Category> categoryList = categoryRepository.findAll();
+		List<Category> categoryList = categoryService.categoryRead();
+		
+		
+		model.addAttribute("postslist", postList);
 		model.addAttribute("categorys", categoryList);
 		return "heag";
 	}
@@ -76,9 +82,11 @@ public class PostController {
 	}
 
 	@PostMapping("/updatepost")
-	public String updatePosts(PostsDto posts, HttpServletRequest request) {
-		log.info("/updatepost " + posts.getCategory() + " " + posts.getDistinction() + " " + posts.getId());
-		postsRepository.setDistinctionFor(posts.getDistinction(), Long.parseLong(posts.getId()));
+	public String updatePosts(PostDto postDto, HttpServletRequest request) {
+		log.info("/updatepost " + postDto.getName() + " " + postDto.getDistinction() + " " + postDto.getId());
+		//postsRepository.setDistinctionFor(postDto.getDistinction(), Long.parseLong(postDto.getId()));
+		postService.Postsave(postDto);
+		
 		return "redirect:/posts";
 
 	}

@@ -20,9 +20,9 @@ public class CustomUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String uid) throws UsernameNotFoundException {
 		 //TODO Auto-generated method stub
 		log.info("uid = " + uid);
-		return Optional.ofNullable(repasitory.findByUid(uid))
+		return Optional.ofNullable(repasitory.findById(uid))
 						.filter(m -> m!=null)
-						.map(m -> new SecurityMember(m)).get();
+						.map(m -> new SecurityMember(m.get())).get();
 	}
 
 }

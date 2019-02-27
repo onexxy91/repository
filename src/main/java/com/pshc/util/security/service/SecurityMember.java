@@ -3,6 +3,7 @@ package com.pshc.util.security.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,7 +24,7 @@ public class SecurityMember extends User{
 	private static final long serialVersionUID = 1L;
 	
 	public SecurityMember(Member member) {
-		super(member.getUid(), member.getPassword(), makeGrantedAuthority(member.getRoles()));
+		super(member.getUsername(), member.getPassword(), makeGrantedAuthority(member.getRoles()));
 		log.info("SecurityMember initial! " + makeGrantedAuthority(member.getRoles()) + member.getPassword());
 		// TODO Auto-generated constructor stub
 	}
@@ -35,9 +36,10 @@ public class SecurityMember extends User{
 		// TODO Auto-generated constructor stub
 	//}
 
+
 	private static List<GrantedAuthority> makeGrantedAuthority(List<MemberRole> roles) {
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-		roles.forEach(role -> list.add(new SimpleGrantedAuthority(ROLE_PREFIX + role.getRoleName())));
+		roles.forEach(role -> list.add(new SimpleGrantedAuthority(ROLE_PREFIX + role.getAuthority())));
 		return list;
 	}
 	

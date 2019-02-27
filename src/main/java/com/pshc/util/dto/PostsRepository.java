@@ -8,14 +8,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pshc.util.model.Posts;
+import com.pshc.util.model.Post;
 
-public interface PostsRepository extends JpaRepository<Posts, Long>{
+public interface PostsRepository extends JpaRepository<Post, Integer>{
 	
-	List<Posts> findByDistinction(String distinction);
-	@Transactional
-	@Modifying
-	@Query("update Posts p set p.distinction = ?1 where p.id = ?2") 
-	int setDistinctionFor(@Param("distinction") String distinction, @Param("id") Long id);
+	List<Post> findByDistinction(String distinction);
+	/*
+	 * @Transactional
+	 * 
+	 * @Modifying
+	 * 
+	 * @Query("update Posts p set p.distinction = ?1 where p.id = ?2") int
+	 * setDistinctionFor(@Param("distinction") String distinction, @Param("id") Long
+	 * id);
+	 */
 	
 }
