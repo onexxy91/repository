@@ -28,15 +28,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public AuthenticationSuccessHandler successHandler() {
-		return new CustomLoginSuccessHandler("/main");
+		return new CustomLoginSuccessHandler("/category");
 	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		// TODO Auto-generated method stub
-		//log.info("띵");
 		auth.userDetailsService(service).passwordEncoder(pEncoder());
-		//System.out.println(service.loadUserByUsername("PHJ").getAuthorities());
 		
 	}
 
@@ -51,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				// 접속권한 정의
 				.antMatchers("/login", "/error", "/h2-console/**", "/", "/sign").permitAll()
-				.antMatchers("/main", "/posts", "/getfiledown", "/updatepost").hasRole("USER")
+				.antMatchers("/**").hasRole("USER")
 				// .anyRequest().authenticated()
 				.and()
 				.csrf().ignoringAntMatchers("/h2-console/**", "/filedown", "/updatepost", "/category") // 여기!
@@ -60,8 +58,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.formLogin()
 				.loginPage("/") //view
 				.loginProcessingUrl("/") //로그인 URL (/) 이거로 되어있어 실제로 Process탐 
-				.defaultSuccessUrl("/main")
+				.defaultSuccessUrl("/category")
 				.successHandler(successHandler())
+				// failure message 세팅 필요 ***********************************
 				.failureUrl("/")
 				.and()
 				// 로그아웃관련 설정
