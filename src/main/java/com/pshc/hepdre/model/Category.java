@@ -1,10 +1,14 @@
 package com.pshc.hepdre.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -29,6 +33,9 @@ public class Category {
 	private String visible;
 	@Column
 	private String content;
+	
+	@OneToMany(mappedBy="category")
+	private List<Post> posts = new ArrayList<Post>();
 	
 	@Builder
 	public Category(int id, String name , String used, String visible, String content) {

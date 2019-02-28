@@ -37,10 +37,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/post")
 public class PostController {
-	
+
 	private static final String PREFIX = "post/";
 	private PostService postService;
-	private CategoryService categoryService;
 	private FileUploadService fileUpload;
 
 	protected String getRemoteIp() {
@@ -59,65 +58,41 @@ public class PostController {
 		return "C:" + getRemoteIp() + ", Rq:";
 	}
 
-//	@GetMapping("/posts")
-//	public String postsView(Model model, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 10) Pageable pageable) {
-//	
-//		Page<Post> postList = postService.PagePostRead(pageable);
-//		List<Category> categoryList = categoryService.categoryRead();
-//	
-//		model.addAttribute("postslist", postList);
-//		model.addAttribute("categorys", categoryList);
-//		return "heag";
-//	}
-//	
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable int id, Model model) {
-		//find post 
-		model.addAttribute("post",new PostDto());
+		// find post
+		model.addAttribute("post", new PostDto());
 		return PREFIX + "edit";
 	}
-	
-	@GetMapping("/new/{id}")
+
+	@GetMapping("/download/{id}")
+	public void download() {
+
+	}
+
+	@GetMapping("/new")
 	public String newPost(Model model, @RequestParam int categoryId) {
 		PostDto post = new PostDto();
-		post.setCategoryId(categoryId);
-		model.addAttribute("post",post);
+		//post.setCategoryId(categoryId);
+		model.addAttribute("post", post);
 		return PREFIX + "new";
 	}
-	
+
 	@PostMapping
-	public String create(PostDto post) {
-		postService.create(post);
-		return "redirect:/category/"+post.getCategoryId();
+	public String create(PostDto post, @RequestPart MultipartFile file, HttpServletRequest request) {
+		if (!file.isEmpty()) {
+			fileUpload.upload(request, file);
+		}
+		return "redirect:/category/";// + post.getCategoryId();
 	}
-	
+
 	@PutMapping
 	public String update() {
-		return "redirect:/category/"+"1";
+		return "redirect:/category/" + "1";
 	}
-	
+
 	@DeleteMapping
 	public String delete() {
-		return "redirect:/category/"+"1";
-	}
-
-	@RequestMapping("/uploadfile")
-	public String uploadFile(@RequestPart MultipartFile files, HttpServletRequest request) {
-		log.info(getClientInfo() + " /uploadfile " + files.getOriginalFilename());
-
-		if (!files.isEmpty()) {
-			fileUpload.upload(request, files);
-		}
-		return "redirect:/posts";
-	}
-
-	@PostMapping("/updatepost")
-	public String updatePosts(PostDto postDto, HttpServletRequest request) {
-		log.info("/updatepost " + postDto.getName() + " " + postDto.getDistinction() + " " + postDto.getId());
-		//postsRepository.setDistinctionFor(postDto.getDistinction(), Long.parseLong(postDto.getId()));
-		postService.create(postDto);
-		
-		return "redirect:/posts";
-
+		return "redirect:/category/" + "1";
 	}
 }

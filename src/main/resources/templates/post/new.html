@@ -21,18 +21,21 @@
 		</div>
 		<div class="row mt-4">
 			<div class="col-md-12">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroupFileAddon01">파일업로드</span>
-					</div>
-					<div class="custom-file">
-				    	<input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-				    	<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-				  	</div>
-				</div>
-				<form role="form" method="POST" action="/post"  th:object="${post}">
+				<form role="form" method="POST" th:action="@{/post}"  th:object="${post}" enctype="multipart/form-data">
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 					<input type="hidden" th:name="categoryId" th:value="${post.categoryId}"/>
+					
+					<div class="form-group row">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="inputGroupFileAddon01">파일업로드</span>
+							</div>
+							<div class="custom-file">
+						    	<input type="file" class="custom-file-input" name="file">
+						    	<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+						  	</div>
+						</div>
+					</div>
 					<div class="form-group row">
 						<label for="ver" class="col-sm-2 col-form-label">버전</label>
 						<div class="col-sm-10">
@@ -47,29 +50,29 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="description" class="col-sm-2 col-form-label">설명</label>
+						<label for="content" class="col-sm-2 col-form-label">설명</label>
 						<div class="col-sm-10">
 							<textarea id="content" class="form-control" th:field="*{content}" rows="3">
 							</textarea>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="used" class="col-sm-2 col-form-label">사용 여부</label>
+						<label for="activated" class="col-sm-2 col-form-label">사용 여부</label>
 						<div class="col-sm-10">
-							<input  id="used" type="text" class="form-control" th:field="*{activated}" value="Y"  readonly>
+							<input  id="activated" type="text" class="form-control" th:field="*{activated}" value="Y"  readonly>
 						</div>
 					</div>
 					<!-- model 추가 요망 -->
 					<div class="form-group row">
-						<label for="beta" class="col-sm-2 col-form-label">베타 여부</label>
+						<label for="distinction" class="col-sm-2 col-form-label">베타 여부</label>
 						<div class="col-sm-10">
-							<input id="beta" type="text" class="form-control" value="Y" readonly>
+							<input id="distinction" type="text" class="form-control" th:field="*{distinction}" value="Y" readonly>
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="name" class="col-sm-2 col-form-label">파일 명</label>
 						<div class="col-sm-10">
-							<input id="activated" type="text" class="form-control" th:field="*{activated}" value="Y" readonly>
+							<input id="name" type="text" class="form-control" th:field="*{name}" value="Y" readonly>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -79,12 +82,12 @@
 							<input id="filePath" type="text" class="form-control" th:field="*{filePath}"readonly>
 						</div>
 					</div>
-				</form>
-				<div class="row">
-					<div class="col">
-						<button type="button" class="btn btn-primary">등록하기</button>
+					<div class="row">
+						<div class="col">
+							<button type="submit" class="btn btn-primary">등록하기</button>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>

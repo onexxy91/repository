@@ -13,14 +13,4 @@ import com.pshc.hepdre.model.Post;
 public interface PostRepository extends JpaRepository<Post, Integer>{
 	
 	List<Post> findByDistinction(String distinction);
-	/*
-	 * @Transactional
-	 * 
-	 * @Modifying
-	 * 
-	 * @Query("update Posts p set p.distinction = ?1 where p.id = ?2") int
-	 * setDistinctionFor(@Param("distinction") String distinction, @Param("id") Long
-	 * id);
-	 */
-	
 }

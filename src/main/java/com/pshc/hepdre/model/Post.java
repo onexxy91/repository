@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -31,15 +33,15 @@ public class Post {
 	private String ver;
 	@Column
 	private String content;
-	@Column
-	private int categoryId;
 	
-	
+	@ManyToOne
+	@JoinColumn(name = "categoryId")
+	private Category category;
 	
 	@Builder
 	public Post(String activated, String distinction, String category,
 					String ver, String fileSize, String filePath, String name,
-						String content, int categoryId) {
+						String content) {
 		this.name = name;
 		this.activated = activated;
 		this.distinction = distinction;
@@ -47,6 +49,5 @@ public class Post {
 		this.filePath = filePath;
 		this.ver = ver;
 		this.content = content;
-		this.categoryId = categoryId;
 	}
 }

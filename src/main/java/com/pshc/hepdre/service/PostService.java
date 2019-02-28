@@ -17,8 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Component
 public class PostService {
-	private PostRepository postsRepository;
 	
+	private PostRepository postsRepository;
 	
 	public void create(PostDto postDto) {
 		postsRepository.save(postDto.toEntity());
@@ -28,6 +28,10 @@ public class PostService {
 	}
 	public Page<Post> PagePostRead(Pageable pageable){
 		return postsRepository.findAll(pageable);
+	}
+	
+	public List<Post> findByDistinction(String distinction){
+		return postsRepository.findByDistinction(distinction);
 	}
 	
 }

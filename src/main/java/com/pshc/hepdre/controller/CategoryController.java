@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pshc.hepdre.dto.CategoryDto;
 import com.pshc.hepdre.model.Category;
+import com.pshc.hepdre.model.Post;
 import com.pshc.hepdre.service.CategoryService;
 
 import lombok.AllArgsConstructor;
@@ -62,10 +63,7 @@ public class CategoryController {
 
 	@GetMapping("/{id}")
 	public String DetailView(@PathVariable int id, Model model) {
-		log.info(PREFIX + "/{" + id + "}");
-
 		model.addAttribute("category", categoryService.findCategory(id));
-
 		return PREFIX + "detail";
 	}
 
