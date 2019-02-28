@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pshc.hepdre.dto.CategoryDto;
-import com.pshc.hepdre.dto.service.CategoryService;
 import com.pshc.hepdre.model.Category;
+import com.pshc.hepdre.service.CategoryService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ public class CategoryController {
 
 		List<Category> categories = categoryService.categoryRead();
 		model.addAttribute("categories", categories);
-		
+
 		return PREFIX + "index";
 	}
 
@@ -47,7 +47,7 @@ public class CategoryController {
 		log.info(PREFIX + "/new");
 
 		model.addAttribute("category", categoryDto);
-		
+
 		return PREFIX + "new";
 	}
 
@@ -56,7 +56,7 @@ public class CategoryController {
 		log.info(PREFIX + "/edit{" + id + "}");
 
 		model.addAttribute("category", categoryService.findCategory(id));
-		
+
 		return PREFIX + "edit";
 	}
 
@@ -65,7 +65,7 @@ public class CategoryController {
 		log.info(PREFIX + "/{" + id + "}");
 
 		model.addAttribute("category", categoryService.findCategory(id));
-		
+
 		return PREFIX + "detail";
 	}
 
@@ -74,7 +74,7 @@ public class CategoryController {
 		log.info(PREFIX + "create/ " + categoryDto.toString());
 
 		categoryService.categoryCreate(categoryDto);
-		
+
 		return "redirect:" + PREFIX;
 	}
 
@@ -93,7 +93,7 @@ public class CategoryController {
 		log.info(PREFIX + "delete/ " + categoryDto.toString());
 
 		categoryService.categoryDelete(categoryDto);
-		
+
 		return "success";
 	}
 

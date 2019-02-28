@@ -23,11 +23,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pshc.hepdre.dto.PostDto;
-import com.pshc.hepdre.dto.service.CategoryService;
-import com.pshc.hepdre.dto.service.PostService;
 import com.pshc.hepdre.model.Category;
 import com.pshc.hepdre.model.Post;
+import com.pshc.hepdre.service.CategoryService;
 import com.pshc.hepdre.service.FileUploadService;
+import com.pshc.hepdre.service.PostService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -105,8 +105,7 @@ public class PostController {
 		log.info(getClientInfo() + " /uploadfile " + files.getOriginalFilename());
 
 		if (!files.isEmpty()) {
-			fileUpload.doWork(request, files);
-			log.info("111111111");
+			fileUpload.upload(request, files);
 		}
 		return "redirect:/posts";
 	}

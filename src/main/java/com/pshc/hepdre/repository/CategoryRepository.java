@@ -1,4 +1,4 @@
-package com.pshc.hepdre.dto;
+package com.pshc.hepdre.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

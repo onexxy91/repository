@@ -1,4 +1,4 @@
-package com.pshc.hepdre.dto.service;
+package com.pshc.hepdre.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 import com.pshc.hepdre.dto.CategoryDto;
-import com.pshc.hepdre.dto.CategoryRepository;
 import com.pshc.hepdre.model.Category;
+import com.pshc.hepdre.repository.CategoryRepository;
 
 import lombok.AllArgsConstructor;
 

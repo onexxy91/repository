@@ -9,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.pshc.hepdre.aws.service.AwsService;
 import com.pshc.hepdre.dto.PostDto;
-import com.pshc.hepdre.dto.PostRepository;
+import com.pshc.hepdre.repository.PostRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,15 +24,14 @@ public class FileUploadService {
 	@Autowired
 	private PostRepository postsRepasitory;
 
-	public void doWork(HttpServletRequest request, MultipartFile multiFile) {
+	public void upload(HttpServletRequest request, MultipartFile multiFile) {
 		try {
 			File convFile = new File(multiFile.getOriginalFilename());
 			FileOutputStream fos = new FileOutputStream(convFile);
 			fos.write(multiFile.getBytes());
 
 			fos.close();
-
-		//	postsDto.setCategory(request.getParameter("category"));
+	
 			postDto.setActivated(request.getParameter("activated"));
 			postDto.setCategoryId(Integer.parseInt(request.getParameter("categoryId")));
 			postDto.setFilePath(request.getParameter("filePath"));
@@ -42,10 +40,7 @@ public class FileUploadService {
 			postDto.setName(request.getParameter("name"));
 			postDto.setVer(request.getParameter("ver"));
 			postDto.setContent(request.getParameter("content"));
-//			postsDto.setVersion(request.getParameter("version"));
-//			postsDto.setDistinction(request.getParameter("distinction"));
-//			postsDto.setFileName(convFile.getName());
-			log.info(postDto.toString());
+			
 			//컬럼변경되서 post에는 category가 없음 일단 하드코딩 
 			awsService.fileUpload(convFile, "HEAG", convFile.getName());
 

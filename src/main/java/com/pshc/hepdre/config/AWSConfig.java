@@ -1,4 +1,4 @@
-package com.pshc.hepdre.aws.config;
+package com.pshc.hepdre.config;
 
 import javax.servlet.http.HttpServletRequest;
 

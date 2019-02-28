@@ -1,4 +1,4 @@
-package com.pshc.hepdre.security.config;
+package com.pshc.hepdre.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

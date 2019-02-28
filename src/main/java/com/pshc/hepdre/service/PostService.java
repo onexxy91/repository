@@ -1,4 +1,4 @@
-package com.pshc.hepdre.dto.service;
+package com.pshc.hepdre.service;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.pshc.hepdre.dto.PostDto;
-import com.pshc.hepdre.dto.PostRepository;
 import com.pshc.hepdre.model.Post;
+import com.pshc.hepdre.repository.PostRepository;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

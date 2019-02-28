@@ -1,4 +1,4 @@
-package com.pshc.hepdre.command;
+package com.pshc.hepdre.model;
 
 import lombok.Data;
 

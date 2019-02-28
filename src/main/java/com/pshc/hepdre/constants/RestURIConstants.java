@@ -1,4 +1,4 @@
-package com.pshc.hepdre.config;
+package com.pshc.hepdre.constants;
 
 public class RestURIConstants {
 	public static final String GET_FILE_DOWN = "/getfiledown";

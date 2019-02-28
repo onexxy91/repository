@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.pshc.hepdre.aws.service.AwsService;
-import com.pshc.hepdre.command.FileCommand;
-import com.pshc.hepdre.config.RestURIConstants;
-import com.pshc.hepdre.dto.PostRepository;
-import com.pshc.hepdre.dto.UserRepository;
+import com.pshc.hepdre.constants.RestURIConstants;
+import com.pshc.hepdre.model.FileCommand;
 import com.pshc.hepdre.model.Member;
 import com.pshc.hepdre.model.MemberRole;
 import com.pshc.hepdre.model.Post;
+import com.pshc.hepdre.repository.PostRepository;
+import com.pshc.hepdre.repository.UserRepository;
+import com.pshc.hepdre.service.AwsService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -111,10 +111,6 @@ public class MainController {
 		} catch (Exception e) {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			e.printStackTrace();
-			
-			
-			
-			
 		} finally {
 			try {
 				if (responseOut != null)

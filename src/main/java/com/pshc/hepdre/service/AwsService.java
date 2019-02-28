@@ -1,4 +1,4 @@
-package com.pshc.hepdre.aws.service;
+package com.pshc.hepdre.service;
 
 import java.io.File;
 import java.io.IOException;
