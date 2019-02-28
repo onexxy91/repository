@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"   
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head>
   	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,13 +31,15 @@
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">사용자관리
-						</a>
-					</li>
+					<div sec:authorize="hasRole('ADMIN')">
+						<li class="nav-item">
+							<a class="nav-link" href="#">사용자관리
+							</a>
+						</li>
+					</div>
 				</ul>
-				<span class="navbar-text mr-4">
-			      	님 환영합니다.
+				<span class="navbar-text mr-4" sec:authorize="isAuthenticated()">
+			      	<span sec:authentication="name">사용자</span>님 환영합니다. (<span sec:authentication="principal.authorities"></span>)
 			    </span>
 			    <span class="navbar-text">
 			    	<a href="/logout" class="text-decoration-none">

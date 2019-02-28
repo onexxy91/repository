@@ -38,7 +38,6 @@ import lombok.extern.slf4j.Slf4j;
 public class MainController {
 
 	private UserRepository userRepository;
-	private PostsRepository postsRepository;
 	private AwsService awsService;
 
 	protected String getRemoteIp() {
@@ -88,12 +87,8 @@ public class MainController {
 		role.setUsername(member.getUsername());
 		role.setAuthority("USER");
 		member.setRoles(Arrays.asList(role));
-		for(MemberRole r : member.getRoles()) {
-			log.info("auth test");
-			log.info(r.getAuthority());
-		}
-		
 		userRepository.save(member);
+		
 		return "redirect:/";
 
 	}
