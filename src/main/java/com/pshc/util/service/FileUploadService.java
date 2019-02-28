@@ -34,7 +34,7 @@ public class FileUploadService {
 
 		//	postsDto.setCategory(request.getParameter("category"));
 			postDto.setActivated(request.getParameter("activated"));
-			postDto.setCategoryId(request.getParameter("categoryId"));
+			postDto.setCategoryId(Integer.parseInt(request.getParameter("categoryId")));
 			postDto.setFilePath(request.getParameter("filePath"));
 			postDto.setFileSize(request.getParameter("fileSize"));
 			postDto.setDistinction(request.getParameter("distinction"));

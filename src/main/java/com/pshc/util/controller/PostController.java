@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -84,8 +85,10 @@ public class PostController {
 	}
 	
 	@GetMapping("/new")
-	public String newPost(Model model) {
-		model.addAttribute("post",new PostDto());
+	public String newPost(Model model, @RequestParam int categoryId) {
+		PostDto post = new PostDto();
+		post.setCategoryId(categoryId);
+		model.addAttribute("post",post);
 		return PREFIX + "new";
 	}
 	
