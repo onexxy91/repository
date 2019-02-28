@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"   
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   <head>
   	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,10 +23,10 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 	
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<div class="collapse navbar-collapse" id="navbarSupportedContent" >
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
-						<a class="nav-link" href="#">카테고리
+						<a class="nav-link" href="/category">카테고리
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
@@ -39,13 +39,14 @@
 			      	님 환영합니다.
 			    </span>
 			    <span class="navbar-text">
-			    	<a href="#" class="text-decoration-none">
+			    	<a href="/logout" class="text-decoration-none">
 			    		<i class="fas fa-sign-out-alt"></i> 로그아웃
 			    	</a>
 			    </span>
 			</div>
 		</nav>
 			<div layout:fragment="page_content"></div>
+	
 		
 		
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

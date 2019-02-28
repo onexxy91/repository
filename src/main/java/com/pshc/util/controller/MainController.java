@@ -7,7 +7,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,31 +63,20 @@ public class MainController {
 		return "auth/login";
 	}
 	
-	@GetMapping("/main")
-	public String mainView(Model model) {
-		log.info(getClientInfo() + "/main");
-
-		// List<Posts> postList = postsRepasitory.findAll();
-		List<Post> postList = postsRepository.findByDistinction("정식");
-		String fileDownURI = RestURIConstants.GET_FILE_DOWN;
-		model.addAttribute("postslist", postList);
-		model.addAttribute("fileDownURI", fileDownURI);
-
-		return "index";
-	}
-
 	@RequestMapping("/login")
 	public String loginForm(HttpServletRequest request) {
 		String referer = request.getHeader("Referer");
 		request.getSession().setAttribute("prevPage", referer);
 		return "login";
 	}
-
-	// 회원가입 view
-	@RequestMapping("/sign")
-	public String signUp() {
-
-		return "auth/sign";
+	
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+		return "redirect:/?logout";
 	}
 
 	// 회원가입 Proc
