@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	layout:decorate="~{layout/base}">
 <head>
 <title>제품</title>
@@ -13,7 +14,9 @@
 				<h3>제품 리스트</h3>
 			</div>
 			<div class="col-md-2 text-right">
-				<a href="/category/new" class="btn btn-primary">추가하기</a>
+				<div sec:authorize="hasRole('ADMIN')">
+					<a href="/category/new" class="btn btn-primary">추가하기</a>	
+				</div>
 			</div>
 		</div>
 		<div class="row">
@@ -24,9 +27,19 @@
 							<h5 class="card-title" th:text="${category.name}"></h5>
 							<h6 class="card-subtitle mb-2 text-muted">v1.0.0</h6>
 							<p class="card-text" th:text="${category.content}"></p>
-							<a th:href="|/category/${category.id}" class="btn btn-primary">관리</a>
-							<a href="#" class="btn btn-danger deleteModal"
-								th:data-id="${category.id}" th:data-name="${category.name}">삭제</a>
+							<div sec:authorize="hasRole('ADMIN')">
+								<div class="btn-group">
+									<a th:href="|/category/${category.id}" class="btn btn-primary">관리</a>
+									<a href="#" class="btn btn-danger deleteModal" th:data-id="${category.id}" th:data-name="${category.name}">삭제</a>
+								</div>
+							</div>
+							<div sec:authorize="hasRole('USER')">
+								<div class="btn-group">
+									<a  href="#" class="btn btn-primary active">다운로드</a>
+									<a  href="#" class="btn btn-primary">이력보기</a>
+								</div>
+								
+							</div>
 						</div>
 					</div>
 				</div>
