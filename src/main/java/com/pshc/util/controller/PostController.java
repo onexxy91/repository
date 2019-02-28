@@ -10,8 +10,11 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -31,7 +34,10 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Slf4j
 @Controller
+@RequestMapping("/post")
 public class PostController {
+	
+	private static final String PREFIX = "post/";
 
 	//private PostsRepository postsRepository;
 	//private CategoryRepository categoryRepository;
@@ -68,6 +74,34 @@ public class PostController {
 		model.addAttribute("postslist", postList);
 		model.addAttribute("categorys", categoryList);
 		return "heag";
+	}
+	
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable int id, Model model) {
+		//find post 
+		model.addAttribute("post",new PostsDto());
+		return PREFIX + "edit";
+	}
+	
+	@GetMapping("/new")
+	public String newPost(Model model) {
+		model.addAttribute("post",new PostsDto());
+		return PREFIX + "new";
+	}
+	
+	@PostMapping
+	public String create() {
+		return "redirect:/category/"+"1";
+	}
+	
+	@PutMapping
+	public String update() {
+		return "redirect:/category/"+"1";
+	}
+	
+	@DeleteMapping
+	public String delete() {
+		return "redirect:/category/"+"1";
 	}
 
 	@RequestMapping("/uploadfile")
