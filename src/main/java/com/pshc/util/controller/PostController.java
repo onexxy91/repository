@@ -93,8 +93,9 @@ public class PostController {
 	}
 	
 	@PostMapping
-	public String create() {
-		return "redirect:/category/"+"1";
+	public String create(PostDto post) {
+		postService.create(post);
+		return "redirect:/category/"+post.getCategoryId();
 	}
 	
 	@PutMapping
@@ -122,7 +123,7 @@ public class PostController {
 	public String updatePosts(PostDto postDto, HttpServletRequest request) {
 		log.info("/updatepost " + postDto.getName() + " " + postDto.getDistinction() + " " + postDto.getId());
 		//postsRepository.setDistinctionFor(postDto.getDistinction(), Long.parseLong(postDto.getId()));
-		postService.Postsave(postDto);
+		postService.create(postDto);
 		
 		return "redirect:/posts";
 

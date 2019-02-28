@@ -15,13 +15,12 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @AllArgsConstructor
-@Slf4j
 @Component
 public class PostService {
 	private PostsRepository postsRepository;
 	
 	
-	public void Postsave(PostDto postDto) {
+	public void create(PostDto postDto) {
 		postsRepository.save(postDto.toEntity());
 	}
 	public List<Post> Postsread() {

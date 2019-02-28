@@ -18,7 +18,7 @@
 				<div class="col-md-6">
 					<h5>
 						<span th:text="${category.name}">제품 이름</span>
-						<a href="#" class="btn btn-primary ml-5">파일 등록하기</a>
+						<a th:href="|/post/new?categoryId=${category.id}" class="btn btn-primary ml-5">파일 등록하기</a>
 					</h5>
 				</div>
 				<div class="col-md-6 text-right">
