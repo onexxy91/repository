@@ -39,10 +39,6 @@ import lombok.extern.slf4j.Slf4j;
 public class PostController {
 	
 	private static final String PREFIX = "post/";
-
-	//private PostsRepository postsRepository;
-	//private CategoryRepository categoryRepository;
-	//private PostDto postsDto;
 	private PostService postService;
 	private CategoryService categoryService;
 	private FileUploadService fileUpload;
@@ -63,20 +59,17 @@ public class PostController {
 		return "C:" + getRemoteIp() + ", Rq:";
 	}
 
-	@GetMapping("/posts")
-	public String postsView(Model model,
-			@PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 10) Pageable pageable) {
-		//Page<Post> postsList = postsRepository.findAll(pageable);
-		Page<Post> postList = postService.PagePostRead(pageable);
-		//List<Category> categoryList = categoryRepository.findAll();
-		List<Category> categoryList = categoryService.categoryRead();
-		
-		
-		model.addAttribute("postslist", postList);
-		model.addAttribute("categorys", categoryList);
-		return "heag";
-	}
-	
+//	@GetMapping("/posts")
+//	public String postsView(Model model, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 10) Pageable pageable) {
+//	
+//		Page<Post> postList = postService.PagePostRead(pageable);
+//		List<Category> categoryList = categoryService.categoryRead();
+//	
+//		model.addAttribute("postslist", postList);
+//		model.addAttribute("categorys", categoryList);
+//		return "heag";
+//	}
+//	
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable int id, Model model) {
 		//find post 
@@ -84,7 +77,7 @@ public class PostController {
 		return PREFIX + "edit";
 	}
 	
-	@GetMapping("/new")
+	@GetMapping("/new/{id}")
 	public String newPost(Model model, @RequestParam int categoryId) {
 		PostDto post = new PostDto();
 		post.setCategoryId(categoryId);

@@ -31,11 +31,11 @@ public class CategoryDto {
 				.content(content)
 				.build();
 	}
-	public String toString(CategoryDto categoryDto) {
-		return categoryDto.id+"      "+
-	            categoryDto.used+"       "+
-	            categoryDto.visible+"          "+
-	            categoryDto.content;
+	public String toString() {
+		return id+"      "+
+	            used+"       "+
+	            visible+"          "+
+	            content;
 				
 	}
 }

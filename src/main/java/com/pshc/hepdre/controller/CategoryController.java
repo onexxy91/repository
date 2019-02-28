@@ -29,46 +29,59 @@ import lombok.extern.slf4j.Slf4j;
 public class CategoryController {
 
 	private static final String PREFIX = "category/";
-
+	private CategoryDto categoryDto;
 	private CategoryService categoryService;
 
 	@GetMapping
-	public String index(Model model) {
-		List<Category> categories = categoryService.categoryRead();
+	public String mainView(Model model) {
+		log.info("/category");
 
+		List<Category> categories = categoryService.categoryRead();
 		model.addAttribute("categories", categories);
+		
 		return PREFIX + "index";
 	}
 
 	@GetMapping("/new")
-	public String newCategory(Model model) {
-		model.addAttribute("category", new CategoryDto());
+	public String CreateView(Model model) {
+		log.info(PREFIX + "/new");
+
+		model.addAttribute("category", categoryDto);
+		
 		return PREFIX + "new";
 	}
 
 	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable int id, Model model) {
-		log.info(Integer.toString(id));
+	public String EditView(@PathVariable int id, Model model) {
+		log.info(PREFIX + "/edit{" + id + "}");
+
 		model.addAttribute("category", categoryService.findCategory(id));
+		
 		return PREFIX + "edit";
 	}
 
 	@GetMapping("/{id}")
-	public String getCategory(@PathVariable int id, Model model) {
+	public String DetailView(@PathVariable int id, Model model) {
+		log.info(PREFIX + "/{" + id + "}");
+
 		model.addAttribute("category", categoryService.findCategory(id));
-		return PREFIX + "show";
+		
+		return PREFIX + "detail";
 	}
 
 	@PostMapping
 	public String create(CategoryDto categoryDto, HttpServletRequest request) {
-		log.info(categoryDto.toString(categoryDto));
+		log.info(PREFIX + "create/ " + categoryDto.toString());
+
 		categoryService.categoryCreate(categoryDto);
+		
 		return "redirect:" + PREFIX;
 	}
 
 	@PutMapping
 	public String update(CategoryDto categoryDto) {
-		log.info("category/update");
+		log.info(PREFIX + "update/ " + categoryDto.toString());
+
 		categoryService.categoryUpdate(categoryDto);
 
 		return "redirect:" + PREFIX;
@@ -77,9 +90,11 @@ public class CategoryController {
 	@DeleteMapping
 	@ResponseBody
 	public String delete(@RequestBody CategoryDto categoryDto) {
-		log.info("category/delete"+ categoryDto.toString());
+		log.info(PREFIX + "delete/ " + categoryDto.toString());
+
 		categoryService.categoryDelete(categoryDto);
+		
 		return "success";
 	}
-	
+
 }
