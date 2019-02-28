@@ -42,6 +42,9 @@ dependencies {
 	runtimeOnly('com.microsoft.sqlserver:mssql-jdbc')
 	compileOnly 'org.projectlombok:lombok'
 	compile("org.springframework.boot:spring-boot-starter-security")
+	// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5
+	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
+	
 	compile('org.springframework.boot:spring-boot-autoconfigure')
 	
 	//자동빌드
