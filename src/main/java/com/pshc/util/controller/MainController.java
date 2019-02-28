@@ -111,6 +111,10 @@ public class MainController {
 		} catch (Exception e) {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			e.printStackTrace();
+			
+			
+			
+			
 		} finally {
 			try {
 				if (responseOut != null)

@@ -35,11 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		// TODO Auto-generated method stub
 		auth.userDetailsService(service).passwordEncoder(pEncoder());
-		  auth.inMemoryAuthentication()
-          .withUser("aaaa").password("aaaa").roles("USER")
-          .and()
-          .withUser("admin").password("password").roles("ADMIN");
-
 		
 	}
 
@@ -55,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// 접속권한 정의
 				.antMatchers("/login", "/error", "/h2-console/**", "/", "/sign").permitAll()
 				.antMatchers("/**").hasRole("USER")
+				.antMatchers("/**").hasRole("ADMIN")
 				// .anyRequest().authenticated()
 				.and()
 				.csrf().ignoringAntMatchers("/h2-console/**", "/filedown", "/updatepost", "/category") // 여기!
