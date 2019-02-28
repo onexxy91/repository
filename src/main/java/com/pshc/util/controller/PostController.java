@@ -79,13 +79,13 @@ public class PostController {
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable int id, Model model) {
 		//find post 
-		model.addAttribute("post",new PostsDto());
+		model.addAttribute("post",new PostDto());
 		return PREFIX + "edit";
 	}
 	
 	@GetMapping("/new")
 	public String newPost(Model model) {
-		model.addAttribute("post",new PostsDto());
+		model.addAttribute("post",new PostDto());
 		return PREFIX + "new";
 	}
 	

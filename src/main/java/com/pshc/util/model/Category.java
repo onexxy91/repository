@@ -31,8 +31,7 @@ public class Category {
 	private String content;
 	
 	@Builder
-	public Category(int id, String name , String used, String visible, String content) {
-		this.id = id;
+	public Category(String name , String used, String visible, String content) {
 		this.name = name; 
 		this.used = used;
 		this.visible = visible;

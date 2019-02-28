@@ -60,9 +60,9 @@ public class CategoryController {
 	}
 
 	@PostMapping
-	public String create(CategoryDto category, HttpServletRequest request) {
-
-		categoryService.categoryCreate(category);
+	public String create(CategoryDto categoryDto, HttpServletRequest request) {
+		log.info(categoryDto.toString(categoryDto));
+		categoryService.categoryCreate(categoryDto);
 		return "redirect:" + PREFIX;
 	}
 

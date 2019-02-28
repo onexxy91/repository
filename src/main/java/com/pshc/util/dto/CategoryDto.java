@@ -16,7 +16,6 @@ public class CategoryDto {
 	
 	public Category toEntity() {
 		return Category.builder()
-				.id(Integer.parseInt(id))
 				.name(name)
 				.used(used)
 				.visible(visible)

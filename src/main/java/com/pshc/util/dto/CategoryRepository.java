@@ -8,6 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pshc.util.model.Category;
 
-public interface CategoryRepository extends JpaRepository<Category, Long>{
+public interface CategoryRepository extends JpaRepository<Category, Integer>{
 	
 }
