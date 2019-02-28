@@ -16,7 +16,7 @@ public class PostDto {
 	private String filePath;
 	private String ver;
 	private String content;
-	private String categoryId;
+	private int categoryId;
 	
 	
 	public Post toEntity() {
@@ -28,7 +28,7 @@ public class PostDto {
 				.filePath(filePath)
 				.ver(ver)
 				.content(content)
-				.categoryId(Integer.parseInt(categoryId))
+				.categoryId(categoryId)
 				.build();
 	}
 	public String toString() {

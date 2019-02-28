@@ -39,7 +39,8 @@
 					</div>
 				</ul>
 				<span class="navbar-text mr-4" sec:authorize="isAuthenticated()">
-			      	<span sec:authentication="name">사용자</span>님 환영합니다. (<span sec:authentication="principal.authorities"></span>)
+			      	<span sec:authentication="name">사용자</span>님 환영합니다. 
+			      	(<th:block th:each="authority, iterStat : ${#authentication.getAuthorities()}"><th:block th:text="${authority.getAuthority().replaceFirst('ROLE_', '') + (iterStat.last?'':',')}"></th:block></th:block>)
 			    </span>
 			    <span class="navbar-text">
 			    	<a href="/logout" class="text-decoration-none">
