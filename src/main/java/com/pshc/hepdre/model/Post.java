@@ -41,9 +41,10 @@ public class Post {
 	private Category category;
 	
 	@Builder
-	public Post(String activated, String distinction,
+	public Post(int id, String activated, String distinction,
 					String ver, String fileSize, String filePath, String name,
 						String content, Category category) {
+		this.id = id;
 		this.name = name;
 		this.activated = activated;
 		this.distinction = distinction;

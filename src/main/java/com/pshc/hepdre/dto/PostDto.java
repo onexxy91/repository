@@ -21,6 +21,7 @@ public class PostDto {
 	
 	public Post toEntity() {
 		return Post.builder()
+				.id(Integer.parseInt(id))
 				.name(name)
 				.activated(activated)
 				.distinction(distinction)

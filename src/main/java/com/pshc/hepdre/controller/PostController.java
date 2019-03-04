@@ -61,7 +61,8 @@ public class PostController {
 
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable int id, Model model) {
-		model.addAttribute("post", postService.findById(id));
+		Post post = postService.findById(id);
+		model.addAttribute("post", post);
 		return PREFIX + "edit";
 	}
 
@@ -94,7 +95,7 @@ public class PostController {
 	public String update(PostDto postDto) {
 		
 		Post post = postService.update(postDto);
-		return "redirect:/category/"+post.getCategory().getId();
+		return "redirect:/category/" + post.getCategory().getId();
 	}
 
 	@DeleteMapping
