@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -22,6 +21,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pshc.hepdre.dto.CategoryDto;
 import com.pshc.hepdre.dto.PostDto;
 import com.pshc.hepdre.model.Category;
 import com.pshc.hepdre.model.Post;
@@ -40,6 +40,7 @@ public class PostController {
 
 	private static final String PREFIX = "post/";
 	private PostService postService;
+	private CategoryService categoryService;
 	private FileUploadService fileUpload;
 
 	protected String getRemoteIp() {
@@ -60,8 +61,7 @@ public class PostController {
 
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable int id, Model model) {
-		// find post
-		model.addAttribute("post", new PostDto());
+		model.addAttribute("post", postService.findById(id));
 		return PREFIX + "edit";
 	}
 
@@ -73,22 +73,28 @@ public class PostController {
 	@GetMapping("/new")
 	public String newPost(Model model, @RequestParam int categoryId) {
 		PostDto post = new PostDto();
-		//post.setCategoryId(categoryId);
+		post.setCategory(categoryService.findCategory(categoryId));
 		model.addAttribute("post", post);
+		
 		return PREFIX + "new";
 	}
 
 	@PostMapping
-	public String create(PostDto post, @RequestPart MultipartFile file, HttpServletRequest request) {
+	public String create(PostDto postDto, @RequestPart MultipartFile file, HttpServletRequest request) {
+		// file upload check 필요함. !!!!
 		if (!file.isEmpty()) {
 			fileUpload.upload(request, file);
 		}
-		return "redirect:/category/";// + post.getCategoryId();
+		
+		postService.create(postDto);
+		return "redirect:/category/" + postDto.getCategory().getId();
 	}
 
 	@PutMapping
-	public String update() {
-		return "redirect:/category/" + "1";
+	public String update(PostDto postDto) {
+		
+		Post post = postService.update(postDto);
+		return "redirect:/category/"+post.getCategory().getId();
 	}
 
 	@DeleteMapping

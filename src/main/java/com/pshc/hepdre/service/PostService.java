@@ -18,20 +18,25 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class PostService {
 	
-	private PostRepository postsRepository;
+	private PostRepository postRepository;
 	
 	public void create(PostDto postDto) {
-		postsRepository.save(postDto.toEntity());
+		postRepository.save(postDto.toEntity());
 	}
-	public List<Post> Postsread() {
-		return postsRepository.findAll();
+	
+	public Post update(PostDto postDto) {
+		return postRepository.save(postDto.toEntity());
+	}
+	
+	public Post findById(int id) {
+		return postRepository.findById(id).get();
 	}
 	public Page<Post> PagePostRead(Pageable pageable){
-		return postsRepository.findAll(pageable);
+		return postRepository.findAll(pageable);
 	}
 	
 	public List<Post> findByDistinction(String distinction){
-		return postsRepository.findByDistinction(distinction);
+		return postRepository.findByDistinction(distinction);
 	}
 	
 }

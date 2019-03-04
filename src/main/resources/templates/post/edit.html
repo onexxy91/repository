@@ -27,62 +27,62 @@
 		</div>
 		<div class="row">
 			<div class="col">
-				<form>
+				<form role="form"  th:method="PUT" th:action="@{/post}"  th:object="${post}">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+					<input type="hidden" th:name="productId" th:value="${post.category.id}"/>
+					<input type="hidden" th:name="id" th:value="${post.id}"/>
 					<div class="form-group row">
 						<label for="ver" class="col-sm-2 col-form-label">버전</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="ver" readonly>
+							<input id="ver" type="text" th:field="*{ver}" class="form-control" readonly>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="fileSize" class="col-sm-2 col-form-label">파일 사이즈</label>
+						<label for="fileSize" class="col-sm-2 col-form-label">파일
+							사이즈(MB)</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="fileSize" value="MB" readonly>
+							<input type="text" id="fileSize" th:field="*{fileSize}" class="form-control" readonly>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="description" class="col-sm-2 col-form-label">설명</label>
+						<label for="content" class="col-sm-2 col-form-label">설명</label>
 						<div class="col-sm-10">
-							<textarea class="form-control" id="description" rows="3">
+							<textarea id="content" class="form-control" th:field="*{content}" rows="3">
 							</textarea>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="used" class="col-sm-2 col-form-label">사용 여부</label>
+						<label for="activated" class="col-sm-2 col-form-label">사용 여부</label>
 						<div class="col-sm-10">
-							<select class="form-control" id="used">
-								<option>Y</option>
-								<option>N</option>
-						    </select>
+							<input  id="activated" type="text" class="form-control" th:field="*{activated}" value="Y"  readonly>
 						</div>
 					</div>
+					<!-- model 추가 요망 -->
 					<div class="form-group row">
-						<label for="beta" class="col-sm-2 col-form-label">베타 여부</label>
+						<label for="distinction" class="col-sm-2 col-form-label">베타 여부</label>
 						<div class="col-sm-10">
-							<select class="form-control" id="beta">
-								<option>Y</option>
-								<option>N</option>
-						    </select>
+							<input id="distinction" type="text" class="form-control" th:field="*{distinction}" value="Y" readonly>
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="name" class="col-sm-2 col-form-label">파일 명</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="name" readonly>
+							<input id="name" type="text" class="form-control" th:field="*{name}" value="Y" readonly>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="filePath" class="col-sm-2 col-form-label">파일 경로</label>
+						<label for="filePath" class="col-sm-2 col-form-label">파일
+							경로</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="filePath" readonly>
+							<input id="filePath" type="text" class="form-control" th:field="*{filePath}"readonly>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<button type="submit" class="btn btn-primary">수정하기</button>
 						</div>
 					</div>
 				</form>
-				<div class="row">
-					<div class="col text-right">
-						<button type="button" class="btn btn-danger">완전 삭제</button>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>

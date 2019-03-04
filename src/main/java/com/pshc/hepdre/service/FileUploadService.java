@@ -31,7 +31,7 @@ public class FileUploadService {
 			fos.write(multiFile.getBytes());
 
 			fos.close();
-	
+			
 			postDto.setActivated(request.getParameter("activated"));
 			//postDto.setCategoryId(Integer.parseInt(request.getParameter("categoryId")));
 			postDto.setFilePath(request.getParameter("filePath"));
@@ -43,8 +43,8 @@ public class FileUploadService {
 			
 			//컬럼변경되서 post에는 category가 없음 일단 하드코딩 
 			awsService.fileUpload(convFile, "HEAG", convFile.getName());
-
-			postsRepasitory.save(postDto.toEntity());
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

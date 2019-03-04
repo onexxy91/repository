@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,13 +37,13 @@ public class Post {
 	private String content;
 	
 	@ManyToOne
-	@JoinColumn(name = "categoryId")
+	@JoinColumn(name="category_id")
 	private Category category;
 	
 	@Builder
-	public Post(String activated, String distinction, String category,
+	public Post(String activated, String distinction,
 					String ver, String fileSize, String filePath, String name,
-						String content) {
+						String content, Category category) {
 		this.name = name;
 		this.activated = activated;
 		this.distinction = distinction;
@@ -49,5 +51,6 @@ public class Post {
 		this.filePath = filePath;
 		this.ver = ver;
 		this.content = content;
+		this.category = category;
 	}
 }
