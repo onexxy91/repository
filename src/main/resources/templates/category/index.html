@@ -15,7 +15,7 @@
 			</div>
 			<div class="col-md-2 text-right">
 				<div sec:authorize="hasRole('ADMIN')">
-					<a href="/category/new" class="btn btn-primary">추가하기</a>	
+					<a href="/category/new" class="btn btn-primary">추가하기</a>
 				</div>
 			</div>
 		</div>
@@ -27,18 +27,38 @@
 							<h5 class="card-title" th:text="${category.name}"></h5>
 							<h6 class="card-subtitle mb-2 text-muted">v1.0.0</h6>
 							<p class="card-text" th:text="${category.content}"></p>
-							<div sec:authorize="hasRole('ADMIN')">
-								<div class="btn-group">
+
+							<div sec:authorize="hasRole('ADMIN')" class="row">
+								<div class="btn-group col-md-12">
 									<a th:href="|/category/${category.id}" class="btn btn-primary">관리</a>
-									<a href="#" class="btn btn-danger deleteModal" th:data-id="${category.id}" th:data-name="${category.name}">삭제</a>
+									<a href="#" class="btn btn-danger deleteModal"
+										th:data-id="${category.id}" th:data-name="${category.name}">삭제</a>
 								</div>
 							</div>
-							<div sec:authorize="hasRole('USER')">
-								<div class="btn-group">
-									<a  href="#" class="btn btn-primary active">다운로드</a>
-									<a  href="#" class="btn btn-primary">이력보기</a>
+							<div sec:authorize="hasRole('USER')" class="row">
+								<div class="btn-group col-md-12">
+									<a th:href="@{'/category/'+${category.id}+'/download'}"
+										class="btn btn-primary active">다운로드</a> 
+									<a class="btn btn-primary" data-toggle="collapse"
+										th:href="@{'#collapse-'+${category.id} }" role="button"
+										aria-expanded="false" th:aria-controls="@{'collapse-'+${category.id}}">
+										이력보기 </a>
 								</div>
-								
+								<div class="col-md-12">
+									<div class="collapse multi-collapse" th:id="@{'collapse-'+${category.id}}">
+										<div class="card card-body">
+											<ul class="list-group">
+												<th:block th:each="post : ${category.posts}">
+													<!-- download link 추가 및  사용여부 filter 추가 필요-->
+													<li class="list-group-item" th:text="${post.name}">
+														파일 이름
+													</li>
+													
+												</th:block>
+											</ul>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -46,7 +66,9 @@
 			</th:block>
 		</div>
 	</div>
-	<!-- Delete modal --> 
+</div>
+<div sec:authorize="hasRole('ADMIN')">
+	<!-- Delete modal -->
 	<div class="modal fade" id="modal1" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<form action="/category" th:method="delete">
@@ -63,46 +85,50 @@
 					</div>
 					<div class="modal-body">
 						<h2>삭제하시겠습니까?</h2>
-						<input type="hidden" name="id" id="categoryid" value="" />
-						<input type="hidden" name="name" id="categoryName" value=""/>
+						<input type="hidden" name="id" id="categoryid" value="" /> <input
+							type="hidden" name="name" id="categoryName" value="" />
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-						<button id="delete-modal-btn" type="button" class="btn btn-primary">삭제</button>
+						<button id="delete-modal-btn" type="button"
+							class="btn btn-primary">삭제</button>
 					</div>
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
-<script th:inline="javascript" layout:fragment="script_area">
-	$(document).ready(function(e) {
-		$('.deleteModal').on('click', function() {
-			var id = $(this).data('id');
-			var name = $(this).data('name');
-			$(".modal-title").text(name);
-			$(".modal-body #categoryName").val(name);
-			$(".modal-body #categoryid").val(id);
-			$("#modal1").modal('show');
-		});
-		
-		$("#delete-modal-btn").on('click', function(){
-			var data = {
-				id : $("#categoryid").val()
-			};
-			$.ajax({
-				url : '/category', 
-				type : 'DELETE',
-				datatype : 'json',
-				contentType : 'application/json; charset=utf-8',
-				data : JSON.stringify(data)
-			}).done(function() {
-				alert('삭제되었습니다!');
-				location.reload(true);
-			}).fail(function(error) {
-				alert(error);
+</div>
+<div sec:authorize="hasRole('ADMIN')">
+	<script th:inline="javascript" layout:fragment="script_area">
+		$(document).ready(function(e) {
+			$('.deleteModal').on('click', function() {
+				var id = $(this).data('id');
+				var name = $(this).data('name');
+				$(".modal-title").text(name);
+				$(".modal-body #categoryName").val(name);
+				$(".modal-body #categoryid").val(id);
+				$("#modal1").modal('show');
+			});
+
+			$("#delete-modal-btn").on('click', function() {
+				var data = {
+					id : $("#categoryid").val()
+				};
+				$.ajax({
+					url : '/category',
+					type : 'DELETE',
+					datatype : 'json',
+					contentType : 'application/json; charset=utf-8',
+					data : JSON.stringify(data)
+				}).done(function() {
+					alert('삭제되었습니다!');
+					location.reload(true);
+				}).fail(function(error) {
+					alert(error);
+				});
 			});
 		});
-	});
-</script>
+	</script>
+</div>
 </html>

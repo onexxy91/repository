@@ -1,13 +1,8 @@
 package com.pshc.hepdre.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,9 +17,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.pshc.hepdre.dto.CategoryDto;
 import com.pshc.hepdre.dto.PostDto;
-import com.pshc.hepdre.model.Category;
 import com.pshc.hepdre.model.Post;
 import com.pshc.hepdre.service.CategoryService;
 import com.pshc.hepdre.service.FileUploadService;
@@ -98,7 +91,6 @@ public class PostController {
 
 	@PutMapping
 	public String update(PostDto postDto) {
-		
 		Post post = postService.update(postDto);
 		return "redirect:/category/" + post.getCategory().getId();
 	}

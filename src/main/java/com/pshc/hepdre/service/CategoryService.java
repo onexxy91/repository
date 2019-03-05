@@ -21,24 +21,14 @@ public class CategoryService {
 	}
 
 	public List<Category> categoryRead() {
-		return categoryRepository.findAll();
+		List<Category> categories = categoryRepository.findAll();
+		return categories;
 	}
 	
 	public Category findCategory(int id) {
 		return categoryRepository.findById(id).get();
 	}
 
-//	public void categoryUpdate(CategoryDto categoryDto) {
-//		
-//		Long id = Long.parseLong(categoryDto.getId());
-//		String name = categoryDto.getName();
-//		String autoUpdate = categoryDto.getAutoupdate();
-//		String enable = categoryDto.getEnable();
-//		String visible = categoryDto.getVisible();
-//		String content = categoryDto.getContent();
-//
-//		categoryRepository.setCategoryFor(name, autoUpdate, enable, visible, content, id);
-//	}
 	public void categoryUpdate(CategoryDto categoryDto) {
 		categoryRepository.save(categoryDto.toEntity());
 	}
