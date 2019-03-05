@@ -16,7 +16,12 @@
 
 			</div>
 			<div class="col-md-2 text-right">
-				<a th:href="|/category/${category_id}" class="btn btn-primary">목록으로</a>
+				<a th:href="|/category/${post.category.id}" class="btn btn-primary">목록으로</a>
+			</div>
+			<div class="col-md-12">
+				<div th:if="${error != null} " class="alert alert-danger" role="alert">
+				  파일이 없습니다.
+				</div>
 			</div>
 		</div>
 		<div class="row mt-4">

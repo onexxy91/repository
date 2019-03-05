@@ -3,6 +3,7 @@ package com.pshc.hepdre.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort.Direction;
@@ -66,9 +67,9 @@ public class PostController {
 		return PREFIX + "edit";
 	}
 
-	@GetMapping("/download/{id}")
-	public void download() {
-
+	@GetMapping("/{id}/download")
+	public void download(HttpServletResponse response) {
+		
 	}
 
 	@GetMapping("/new")
@@ -81,13 +82,17 @@ public class PostController {
 	}
 
 	@PostMapping
-	public String create(PostDto postDto, @RequestPart MultipartFile file, HttpServletRequest request) {
+	public String create(PostDto postDto,
+						@RequestPart MultipartFile file, 
+						HttpServletRequest request,
+						Model model) {
 		// file upload check 필요함. !!!!
 		if (!file.isEmpty()) {
 			fileUpload.upload(request, file);
+			postService.create(postDto);
 		}
 		
-		postService.create(postDto);
+		// error checking 필요
 		return "redirect:/category/" + postDto.getCategory().getId();
 	}
 

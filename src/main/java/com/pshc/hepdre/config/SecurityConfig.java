@@ -48,9 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				// 접속권한 정의
+				
 				.antMatchers("/login", "/error", "/h2-console/**", "/", "/sign").permitAll()
-				.antMatchers("/**").hasAnyRole("USER","ADMIN")
-				// .anyRequest().authenticated()
+				.antMatchers("/category").hasAnyRole("ADMIN","USER")
+				.antMatchers("/**").hasRole("ADMIN")
 				.and()
 				.csrf().ignoringAntMatchers("/h2-console/**", "/filedown", "/updatepost", "/category") // 여기!
 				.and()

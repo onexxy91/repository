@@ -15,36 +15,20 @@ import com.pshc.hepdre.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
 public class FileUploadService {
 	@Autowired
 	private AwsService awsService;
-	@Autowired
-	private PostDto postDto;
-	@Autowired
-	private PostRepository postsRepasitory;
-
+	
 	public void upload(HttpServletRequest request, MultipartFile multiFile) {
 		try {
+			
 			File convFile = new File(multiFile.getOriginalFilename());
-			FileOutputStream fos = new FileOutputStream(convFile);
-			fos.write(multiFile.getBytes());
-
-			fos.close();
-			
-			postDto.setActivated(request.getParameter("activated"));
-			//postDto.setCategoryId(Integer.parseInt(request.getParameter("categoryId")));
-			postDto.setFilePath(request.getParameter("filePath"));
-			postDto.setFileSize(request.getParameter("fileSize"));
-			postDto.setDistinction(request.getParameter("distinction"));
-			postDto.setName(request.getParameter("name"));
-			postDto.setVer(request.getParameter("ver"));
-			postDto.setContent(request.getParameter("content"));
-			
-			//컬럼변경되서 post에는 category가 없음 일단 하드코딩 
+//			FileOutputStream fos = new FileOutputStream(convFile);
+//			fos.write(multiFile.getBytes());
+//			fos.close();
+			 
+			// Category Name Setting 필요
 			awsService.fileUpload(convFile, "HEAG", convFile.getName());
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
