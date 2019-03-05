@@ -96,30 +96,30 @@ public class MainController {
 	/*
 	 * ajax 로 post방식 하려했으나 stream 처리불가 로 getMapping
 	 */
-	@GetMapping(RestURIConstants.GET_FILE_DOWN)
-	public void getFileDown(FileCommand fileCommand, HttpServletResponse response) {
-		
-		log.info(getClientInfo() + "/filedown?" + fileCommand.getCategory() + " " + fileCommand.getFileName());
-		OutputStream responseOut = null;
-		String category = fileCommand.getCategory();
-		String fileName = fileCommand.getFileName();
-
-		try {
-			response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
-			responseOut = response.getOutputStream();
-			awsService.downloadFile(category, fileName, responseOut);
-		} catch (Exception e) {
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			e.printStackTrace();
-		} finally {
-			try {
-				if (responseOut != null)
-					responseOut.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-
-	}
+//	@GetMapping(RestURIConstants.GET_FILE_DOWN)
+//	public void getFileDown(FileCommand fileCommand, HttpServletResponse response) {
+//		
+//		log.info(getClientInfo() + "/filedown?" + fileCommand.getCategory() + " " + fileCommand.getFileName());
+//		OutputStream responseOut = null;
+//		String category = fileCommand.getCategory();
+//		String fileName = fileCommand.getFileName();
+//
+//		try {
+//			response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+//			responseOut = response.getOutputStream();
+//			awsService.downloadFile(category, fileName, responseOut);
+//		} catch (Exception e) {
+//			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				if (responseOut != null)
+//					responseOut.close();
+//			} catch (Exception e2) {
+//				e2.printStackTrace();
+//			}
+//		}
+//
+//	}
 
 }

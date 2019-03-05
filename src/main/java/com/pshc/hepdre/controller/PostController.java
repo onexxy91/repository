@@ -1,5 +1,10 @@
 package com.pshc.hepdre.controller;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,12 +18,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pshc.hepdre.dto.PostDto;
+import com.pshc.hepdre.model.Category;
 import com.pshc.hepdre.model.Post;
+import com.pshc.hepdre.service.AwsService;
 import com.pshc.hepdre.service.CategoryService;
 import com.pshc.hepdre.service.FileUploadService;
 import com.pshc.hepdre.service.PostService;
@@ -35,6 +43,7 @@ public class PostController {
 	private static final String PREFIX = "post/";
 	private PostService postService;
 	private CategoryService categoryService;
+	private AwsService awsService;
 	private FileUploadService fileUpload;
 
 	protected String getRemoteIp() {
@@ -60,14 +69,46 @@ public class PostController {
 		return PREFIX + "edit";
 	}
 
+	
 	@GetMapping("/{id}/download")
-	public void download(HttpServletResponse response) {
+	@ResponseBody
+	public String download(@PathVariable int id, HttpServletResponse response) {
+		String returnMsg = "success";
+		Post post = postService.findById(id);
+		Category category = categoryService.findCategory(post.getCategory().getId());
 		
+		log.info(getClientInfo() + "/filedown?" + category.getName() + " " + post.getName());
+		OutputStream responseOut = null;
+		String categoryName = category.getName();
+		String postName = post.getName();
+
+		response.setHeader("Content-Disposition", "attachment; filename=" + post.getName());
+		response.setCharacterEncoding("UTF-8"); 
+		try {
+			responseOut = response.getOutputStream();
+			if(!awsService.downloadFile(categoryName, postName, responseOut)) {
+				returnMsg = "fail";
+			}
+				
+		} catch (IOException e) {
+			log.error("file stream error");
+		} finally {
+			try {
+				if (responseOut != null)
+					responseOut.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}	
+		}
+		log.info("download status : "+returnMsg);
+		
+		return "{\"success\":1}";
 	}
 
 	@GetMapping("/new")
 	public String newPost(Model model, @RequestParam int categoryId) {
 		PostDto post = new PostDto();
+		post.setId("0");
 		post.setCategory(categoryService.findCategory(categoryId));
 		model.addAttribute("post", post);
 		

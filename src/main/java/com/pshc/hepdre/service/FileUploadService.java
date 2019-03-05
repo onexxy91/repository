@@ -23,9 +23,9 @@ public class FileUploadService {
 		try {
 			
 			File convFile = new File(multiFile.getOriginalFilename());
-//			FileOutputStream fos = new FileOutputStream(convFile);
-//			fos.write(multiFile.getBytes());
-//			fos.close();
+			FileOutputStream fos = new FileOutputStream(convFile);
+			fos.write(multiFile.getBytes());
+			fos.close();
 			 
 			// Category Name Setting 필요
 			awsService.fileUpload(convFile, "HEAG", convFile.getName());

@@ -50,7 +50,7 @@ public class AwsService {
 	}
 
 	// download object
-	public void downloadFile(String category, String fileName, OutputStream outputStream) throws IOException {
+	public boolean downloadFile(String category, String fileName, OutputStream outputStream) throws IOException {
 		if (amazonS3 == null) {
 			throw new NullPointerException();
 		}
@@ -73,7 +73,7 @@ public class AwsService {
 			log.debug("Object %s has been downloaded.\n", fileName);
 			// System.out.format("Object %s has been downloaded.\n", objectName);
 		} catch (AmazonS3Exception e) {
-			e.printStackTrace();
+			return false;
 		} finally {
 			try {
 				if (s3objectInputStream != null)
@@ -83,5 +83,7 @@ public class AwsService {
 			}
 
 		}
+		
+		return true;
 	}
 }
