@@ -66,10 +66,12 @@
 										<span th:text="${post.content}">상세설명</span>
 									</td>
 									<td>
-										<span th:text="${post.distinction}">베타여부</span>
+										<span th:text="베타" th:if="${post.distinction.equals('B')}">베타</span>
+										<span th:text="정식" th:if="${post.distinction.equals('M')}">정식</span>
 									</td>
 									<td>
-										<span th:text="${post.activated}">사용여부</span>
+										<span th:text="사용" th:if="${post.activated.equals('Y')}"></span>
+										<span th:text="사용안함" th:if="${post.activated.equals('N')}">사용안함</span>
 									</td>
 									<td>
 										<div class="btn-group">
