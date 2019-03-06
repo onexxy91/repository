@@ -13,6 +13,12 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
+war {
+    baseName = 'HEProduct'
+    version = '0.0.1-SNAPSHOT'
+}
 
 group = 'com.pshc.util'
 version = '0.0.1-SNAPSHOT'
@@ -37,7 +43,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws'
-	//runtimeOnly 'com.h2database:h2'
+	// tomcat setting
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '1.2.1.RELEASE'
+	
 	
 	runtimeOnly('com.microsoft.sqlserver:mssql-jdbc')
 	compileOnly 'org.projectlombok:lombok'

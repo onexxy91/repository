@@ -83,6 +83,7 @@ public class PostController {
 		String postName = post.getName();
 
 		response.setHeader("Content-Disposition", "attachment; filename=" + post.getName());
+		
 		response.setCharacterEncoding("UTF-8"); 
 		try {
 			responseOut = response.getOutputStream();
