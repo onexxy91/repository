@@ -16,6 +16,6 @@ public class PshcUtil1Application extends SpringBootServletInitializer{
 	public static void main(String[] args) {
 		SpringApplication.run(PshcUtil1Application.class, args);
 	}
-
+	// fix #1
 }
 
