@@ -30,21 +30,22 @@ import lombok.extern.slf4j.Slf4j;
 public class CategoryController {
 
 	private static final String PREFIX = "category/";
+	
 	private CategoryService categoryService;
-
+	
 	@GetMapping
 	public String mainView(Model model) {
 		log.info("/category");
 
 		List<Category> categories = categoryService.categoryRead();
 		model.addAttribute("categories", categories);
-		
+
 		return PREFIX + "index";
 	}
-	
+
 	@GetMapping("/{id}/download")
 	public String downloadPost(@PathVariable int id) {
-		
+
 		return "";
 	}
 
@@ -68,6 +69,11 @@ public class CategoryController {
 
 	@GetMapping("/{id}")
 	public String DetailView(@PathVariable int id, Model model) {
+		Category category = categoryService.findCategory(id);
+		List<Post> postList = category.getPosts();
+		for (Post post : postList) {
+			post.getName();
+		}
 		model.addAttribute("category", categoryService.findCategory(id));
 		return PREFIX + "detail";
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pshc.hepdre.dto.PostDto;
 import com.pshc.hepdre.model.Post;
@@ -20,6 +21,9 @@ public class PostService {
 	
 	private PostRepository postRepository;
 	
+	public List<Post> read() {
+		return postRepository.findAll();
+	}
 	public void create(PostDto postDto) {
 		postRepository.save(postDto.toEntity());
 	}

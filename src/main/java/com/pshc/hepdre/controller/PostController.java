@@ -69,32 +69,31 @@ public class PostController {
 		return PREFIX + "edit";
 	}
 
-	
 	@GetMapping("/{id}/download")
 	@ResponseBody
 	public String download(@PathVariable int id, HttpServletResponse response) throws IOException {
-		//String returnMsg = "success";
+		// String returnMsg = "success";
 		Post post = postService.findById(id);
 		Category category = categoryService.findCategory(post.getCategory().getId());
-		
+
 		log.info(getClientInfo() + "/filedown?" + category.getName() + " " + post.getName());
 		OutputStream responseOut = null;
 		String categoryName = category.getName();
 		String postName = post.getName();
 
 		response.setHeader("Content-Disposition", "attachment; filename=" + post.getName());
-		
-		response.setCharacterEncoding("UTF-8"); 
-	
+
+		response.setCharacterEncoding("UTF-8");
+
 		responseOut = response.getOutputStream();
-		
+
 		awsService.downloadFile(categoryName, postName, responseOut, response);
-		
+
 		responseOut.close();
-		//log.info("download status : "+returnMsg);
-		
+		// log.info("download status : "+returnMsg);
+
 		return "{\"success\":1}";
-		//fix #2
+
 	}
 
 	@GetMapping("/new")
@@ -103,21 +102,19 @@ public class PostController {
 		post.setId("0");
 		post.setCategory(categoryService.findCategory(categoryId));
 		model.addAttribute("post", post);
-		
+
 		return PREFIX + "new";
 	}
 
 	@PostMapping
-	public String create(PostDto postDto,
-						@RequestPart MultipartFile file, 
-						HttpServletRequest request,
-						Model model) {
-		// file upload check 필요함. !!!!
+	public String create(PostDto postDto, @RequestPart MultipartFile file, HttpServletRequest request, Model model) {
+
 		if (!file.isEmpty()) {
-			fileUpload.upload(request, file);
+			fileUpload.upload(postDto, file);
+
 			postService.create(postDto);
 		}
-		
+
 		// error checking 필요
 		return "redirect:/category/" + postDto.getCategory().getId();
 	}

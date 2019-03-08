@@ -54,13 +54,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							<th:block th:each="post : ${category.posts}">
+							<th:block th:each="post : ${category.posts}" >
 								<tr>
 									<td>
 										<span th:text="${post.ver}">*.*.*</span>
 									</td>
 									<td>
-										<span th:text="${post.name}">이름</span>
+									    <input type="hidden"  name="Name" th:value="${#strings.indexOf(post.Name,'he')}"/>   
+										<span th:text="${#strings.substring(post.Name,0,3)}  ">이름</span>
 									</td>
 									<td>
 										<span th:text="${post.content}">상세설명</span>
