@@ -4,11 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.http.HttpResponse;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
@@ -50,7 +53,7 @@ public class AwsService {
 	}
 
 	// download object
-	public boolean downloadFile(String category, String fileName, OutputStream outputStream) throws IOException {
+	public void downloadFile(String category, String fileName, OutputStream outputStream, HttpServletResponse response) throws IOException {
 		if (amazonS3 == null) {
 			throw new NullPointerException();
 		}
@@ -70,10 +73,13 @@ public class AwsService {
 			}
 			outputStream.flush();
 
-			log.debug("Object %s has been downloaded.\n", fileName);
+			log.info("download Success " + fileName);
 			// System.out.format("Object %s has been downloaded.\n", objectName);
 		} catch (AmazonS3Exception e) {
-			return false;
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (s3objectInputStream != null)
@@ -81,9 +87,7 @@ public class AwsService {
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
-
 		}
-		
-		return true;
 	}
+	
 }

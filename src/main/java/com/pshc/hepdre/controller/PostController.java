@@ -72,8 +72,8 @@ public class PostController {
 	
 	@GetMapping("/{id}/download")
 	@ResponseBody
-	public String download(@PathVariable int id, HttpServletResponse response) {
-		String returnMsg = "success";
+	public String download(@PathVariable int id, HttpServletResponse response) throws IOException {
+		//String returnMsg = "success";
 		Post post = postService.findById(id);
 		Category category = categoryService.findCategory(post.getCategory().getId());
 		
@@ -85,25 +85,16 @@ public class PostController {
 		response.setHeader("Content-Disposition", "attachment; filename=" + post.getName());
 		
 		response.setCharacterEncoding("UTF-8"); 
-		try {
-			responseOut = response.getOutputStream();
-			if(!awsService.downloadFile(categoryName, postName, responseOut)) {
-				returnMsg = "fail";
-			}
-				
-		} catch (IOException e) {
-			log.error("file stream error");
-		} finally {
-			try {
-				if (responseOut != null)
-					responseOut.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}	
-		}
-		log.info("download status : "+returnMsg);
+	
+		responseOut = response.getOutputStream();
+		
+		awsService.downloadFile(categoryName, postName, responseOut, response);
+		
+		responseOut.close();
+		//log.info("download status : "+returnMsg);
 		
 		return "{\"success\":1}";
+		//fix #2
 	}
 
 	@GetMapping("/new")
