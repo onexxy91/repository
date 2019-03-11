@@ -39,7 +39,7 @@ public class AwsService {
 				PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, setFile, file);
 
 				// file permission
-				putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
+				putObjectRequest.setCannedAcl(CannedAccessControlList.Private);
 
 				// upload file
 				PutObjectResult ret = amazonS3.putObject(putObjectRequest);
