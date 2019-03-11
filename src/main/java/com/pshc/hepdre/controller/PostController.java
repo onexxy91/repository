@@ -95,14 +95,15 @@ public class PostController {
 		return "{\"success\":1}";
 
 	}
-
+	
+	//싱글톤 으로 수정.
 	@GetMapping("/new")
 	public String newPost(Model model, @RequestParam int categoryId) {
-		PostDto post = new PostDto();
-		post.setId("0");
-		post.setCategory(categoryService.findCategory(categoryId));
-		model.addAttribute("post", post);
-
+		//PostDto post = new PostDto();
+		//post.setId("0");
+		//post.setCategory(categoryService.findCategory(categoryId));
+		//model.addAttribute("post", post);
+		model.addAttribute("categoryid", categoryId);
 		return PREFIX + "new";
 	}
 

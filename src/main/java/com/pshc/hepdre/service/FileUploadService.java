@@ -29,10 +29,20 @@ public class FileUploadService {
 
 	public void upload(PostDto postDto, MultipartFile multiFile) {
 		try {
+			String categoryName = postDto.getCategory().getName();
 
 			String fileUid = Integer.toString(postService.read().size()) + "_";
 
-			File convFile = new File(fileUid + multiFile.getOriginalFilename());
+			File fileRootPath = new File(filePath + File.separator + categoryName);
+
+			if (!fileRootPath.isDirectory()) {
+				fileRootPath.mkdirs();
+			}
+
+			File convFile = new File(
+					fileRootPath.getPath() + File.separator + fileUid + multiFile.getOriginalFilename());
+
+			System.out.println(multiFile.getOriginalFilename());
 
 			fos = new FileOutputStream(convFile);
 
@@ -40,7 +50,7 @@ public class FileUploadService {
 
 			fos.close();
 
-			awsService.fileUpload(convFile, postDto.getCategory().getName(), convFile.getName());
+			awsService.fileUpload(convFile, categoryName, convFile.getName());
 			// set uid+fileName
 			postDto.setName(convFile.getName());
 		} catch (Exception e) {

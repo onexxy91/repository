@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Post {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id", unique = true)
 	@Id
 	private int id;
 	@Column

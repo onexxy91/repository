@@ -51,7 +51,7 @@
 												<th:block th:each="post : ${category.posts}">
 													<!-- download link 추가 및  사용여부 filter 추가 필요-->
 													<a th:href="@{'/post/'+${post.id}+'/download' }" target="_blank" 
-													class="list-group-item post-download"  th:text="${post.name}">
+													class="list-group-item post-download"  th:text="${#strings.substringAfter(post.Name,'_')}">
 														파일 이름
 													</a>
 												</th:block>
@@ -127,8 +127,8 @@
 				}).done(function() {
 					alert('삭제되었습니다!');
 					location.reload(true);
-				}).fail(function(error) {
-					alert(error);
+				}).fail(function(textStatus) {
+					alert(textStatus);
 				});
 			});
 		});

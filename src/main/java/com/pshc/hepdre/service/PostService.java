@@ -25,7 +25,7 @@ public class PostService {
 		return postRepository.findAll();
 	}
 	public void create(PostDto postDto) {
-		postRepository.save(postDto.toEntity());
+		postRepository.save(postDto.saveToEntity());
 	}
 	
 	public Post update(PostDto postDto) {

@@ -32,6 +32,20 @@ public class PostDto {
 				.category(category)
 				.build();
 	}
+	
+	public Post saveToEntity() {
+		return Post.builder()
+				.name(name)
+				.activated(activated)
+				.distinction(distinction)
+				.fileSize(fileSize)
+				.filePath(filePath)
+				.ver(ver)
+				.content(content)
+				.category(category)
+				.build();
+	}
+	
 	public String toString() {
 		return name.toLowerCase()+"          "+
 				activated+"          "+

@@ -30,9 +30,9 @@ import lombok.extern.slf4j.Slf4j;
 public class CategoryController {
 
 	private static final String PREFIX = "category/";
-	
+
 	private CategoryService categoryService;
-	
+
 	@GetMapping
 	public String mainView(Model model) {
 		log.info("/category");
