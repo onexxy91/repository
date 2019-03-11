@@ -37,12 +37,10 @@
 							</div>
 							<div sec:authorize="hasRole('USER')" class="row">
 								<div class="btn-group col-md-12">
-									<a th:href="@{'/category/'+${category.id}+'/download'}"
-										class="btn btn-primary active">다운로드</a> 
 									<a class="btn btn-primary" data-toggle="collapse"
 										th:href="@{'#collapse-'+${category.id} }" role="button"
 										aria-expanded="false" th:aria-controls="@{'collapse-'+${category.id}}">
-										이력보기 </a>
+										목록보기 </a>
 								</div>
 								<div class="col-md-12" >
 									<div class="collapse multi-collapse" th:id="@{'collapse-'+${category.id}}">
