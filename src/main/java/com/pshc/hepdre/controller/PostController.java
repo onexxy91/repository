@@ -96,7 +96,7 @@ public class PostController {
 
 	}
 	
-	//싱글톤 으로 수정.
+	
 	@GetMapping("/new")
 	public String newPost(Model model, @RequestParam int categoryId) {
 		//PostDto post = new PostDto();
