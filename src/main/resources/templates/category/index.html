@@ -86,8 +86,8 @@
 						</div>
 						<div class="modal-body">
 							<h2>삭제하시겠습니까?</h2>
-							<input type="hidden" name="id" id="categoryid" value="" /> <input
-								type="hidden" name="name" id="categoryName" value="" />
+							<input type="hidden" name="id" id="categoryid" value="" /> 
+							<input type="hidden" name="name" id="categoryName" value="" />
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
@@ -125,7 +125,7 @@
 				}).done(function() {
 					alert('삭제되었습니다!');
 					location.reload(true);
-				}).fail(function(textStatus) {
+				} ).fail(function(textStatus) {
 					alert(textStatus);
 				});
 			});

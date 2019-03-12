@@ -31,6 +31,9 @@ public class PostService {
 	public Post update(PostDto postDto) {
 		return postRepository.save(postDto.toEntity());
 	}
+	public void delete(PostDto postDto) {
+		postRepository.delete(postDto.toEntity());
+	}
 	
 	public Post findById(int id) {
 		return postRepository.findById(id).get();

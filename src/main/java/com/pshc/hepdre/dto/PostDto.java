@@ -47,10 +47,10 @@ public class PostDto {
 	}
 	
 	public String toString() {
-		return name.toLowerCase()+"          "+
+		return  id+"     "+
 				activated+"          "+
 				distinction+"          "+
 				fileSize+"              "+
-				name+"        "+id;
+				name;
 	}
 }
