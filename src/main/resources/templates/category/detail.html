@@ -80,7 +80,7 @@
 			<div class="modal fade" id="postdeletemodal" tabindex="-1"
 				role="dialog" aria-labelledby="exampleModalCenterTitle"
 				aria-hidden="true">
-				<form action="/post" th:method="delete">
+				<form>
 					<input type="hidden" th:name="${_csrf.parameterName}"
 						th:value="${_csrf.token}" />
 					<div class="modal-dialog modal-dialog-centered" role="document">
