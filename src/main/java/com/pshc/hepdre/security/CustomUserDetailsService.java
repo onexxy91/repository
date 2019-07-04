@@ -15,14 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomUserDetailsService implements UserDetailsService{
 	
 	@Autowired
-	UserRepository repasitory;
+	UserRepository repository;
 	@Override
 	public UserDetails loadUserByUsername(String uid) throws UsernameNotFoundException {
 		 //TODO Auto-generated method stub
 		log.info("uid = " + uid);
-		return Optional.ofNullable(repasitory.findById(uid))
+		return Optional.ofNullable(repository.findByUsername(uid))
 						.filter(m -> m!=null)
-						.map(m -> new SecurityMember(m.get())).get();
+						.map(m -> new SecurityMember(m)).get();
 	}
 
 }

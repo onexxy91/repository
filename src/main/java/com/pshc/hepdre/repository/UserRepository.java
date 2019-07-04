@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.pshc.hepdre.model.Member;
 
-public interface UserRepository extends JpaRepository<Member, String>{
-	
+public interface UserRepository extends JpaRepository<Member, Integer>{
+	Member findByUsername(String username);
 }

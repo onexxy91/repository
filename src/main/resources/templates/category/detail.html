@@ -52,9 +52,8 @@
 										th:text="${#strings.substringAfter(post.Name,'_')}">이름</span>
 									</td>
 									<td><span th:text="${post.content}">상세설명</span></td>
-									<td><span th:text="베타"
-										th:if="${post.distinction.equals('B')}">베타</span> <span
-										th:text="정식" th:if="${post.distinction.equals('M')}">정식</span>
+									<td><span th:text="베타" th:if="${post.distinction.equals('B')}">베타</span> 
+										<span th:text="정식" th:if="${post.distinction.equals('M')}">정식</span>
 									</td>
 									<td><span th:text="사용"
 										th:if="${post.activated.equals('Y')}"></span> <span
@@ -62,10 +61,8 @@
 									</td>
 									<td>
 										<div class="btn-group">
-											<a th:href="@{'/post/edit/'+${post.id}}"
-												class="btn btn-warning">수정</a> <a href="#"
-												class="btn btn-danger postdeletemodal"
-												th:data-id="${post.id}" th:data-name="${post.name}">삭제</a>
+											<a th:href="@{'/post/edit/'+${post.id}}" class="btn btn-warning">수정</a> 
+											<a href="#" class="btn btn-danger postdeletemodal" th:data-id="${post.id}" th:data-name="${post.name}">삭제</a>
 										</div>
 									</td>
 								</tr>

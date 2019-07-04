@@ -45,7 +45,8 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws'
 	// tomcat setting
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '1.2.1.RELEASE'
-	
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
 	
 	runtimeOnly('com.microsoft.sqlserver:mssql-jdbc')
 	compileOnly 'org.projectlombok:lombok'

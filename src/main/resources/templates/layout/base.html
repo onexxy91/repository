@@ -26,14 +26,14 @@
 	
 			<div class="collapse navbar-collapse" id="navbarSupportedContent" >
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
+					<li class="nav-item">
 						<a class="nav-link" href="/category">카테고리
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
 					<div sec:authorize="hasRole('ADMIN')">
 						<li class="nav-item">
-							<a class="nav-link" href="#">사용자관리
+							<a class="nav-link" th:href="@{'/user'}">사용자관리
 							</a>
 						</li>
 					</div>

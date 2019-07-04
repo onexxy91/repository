@@ -25,6 +25,7 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 		if (session != null) {
 			String redirectUrl = (String) session.getAttribute("prevPage");
 			log.info("redirectUrl : " + redirectUrl);
+			log.info(authentication.getAuthorities().toString());
 			if(redirectUrl != null) {
 				session.removeAttribute("prevPage");
 				getRedirectStrategy().sendRedirect(req, response, redirectUrl);
